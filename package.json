@@ -1,0 +1,24 @@
+{
+  "name": "ecometer",
+  "version": "1.0.0",
+  "description": "Emissionsanzeige für das UnternehmensNetzwerk Motzener Straße e.V.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkrgr/ecometer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rkrgr/ecometer/issues"
+  },
+  "homepage": "https://github.com/rkrgr/ecometer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
