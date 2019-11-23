@@ -7,9 +7,7 @@ const app = express();
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.use('/', require('./routes/index.js'));
 
 const PORT = process.env.PORT || 5000;
 
