@@ -12,4 +12,6 @@ app.set('view engine', 'handlebars');
 
 app.use('/', require('./routes/index.js'));
 
+app.use('/invoice', require('./routes/invoice.js'));
+
 module.exports = app;

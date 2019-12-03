@@ -1,0 +1,28 @@
+<table class="invoice">
+    <thead>
+        <tr>
+            <th colspan="5">Rechnungen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each invoices}}
+        <tr>
+            <td>
+                <span>{{this.invoiceName}}</span>
+            </td>
+            <td>
+                <span>{{this.invoiceValue}}</span>
+            </td>
+            <td>
+                <span>{{this.emissionFactor}}</span>
+            </td>
+            <td>
+                <span>{{this.dateStart}}</span>
+            </td>
+            <td>
+                <span>{{this.dateEnd}}</span>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
