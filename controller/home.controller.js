@@ -1,8 +1,8 @@
 const measureService = require("../services/measure.service");
 
 module.exports = {
-    index: (req, res) => {
-            const measures = measureService.getLatestMeasures(3);
+    index: async (req, res) => {
+            const measures = await measureService.getLatestMeasures(3);
             res.render('index', {
                 measures
             });

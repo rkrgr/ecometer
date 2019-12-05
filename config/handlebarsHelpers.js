@@ -1,5 +1,7 @@
+const moment = require('moment')
+
 module.exports = {
     formatDateTime: (dateTime) => {
-        return dateTime.format("D.M.YYYY");
+        return moment(dateTime).format("D.M.YYYY")
     }
 }
