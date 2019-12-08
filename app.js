@@ -10,6 +10,6 @@ app.engine('handlebars', exphbs({
  }));
 app.set('view engine', 'handlebars');
 
-app.use('/', require('./routes/index.js'));
+app.use('/', require('./routes/index.router'));
 
 module.exports = app;
