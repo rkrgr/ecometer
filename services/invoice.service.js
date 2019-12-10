@@ -3,11 +3,11 @@ const invoiceModel = require("../db/models/invoice.db");
 module.exports = {
     getInvoice: (id) => {
         return new Promise(async (resolve, reject) => {
-            const invoices = await invoiceModel.getInvoices(id)
-            if (invoices === undefined) {
+            const invoice = await invoiceModel.getInvoices(id)
+            if (invoice === undefined) {
                 reject('Could not access invoice by id')
             }
-            resolve(invoices)
+            resolve(invoice)
         }) 
     },
     getInvoices: (num) => {
