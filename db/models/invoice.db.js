@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 module.exports = {
-    getInvoice: (num) => {
+    getInvoices: (num) => {
         return [
             {
                 invoiceName: "1",

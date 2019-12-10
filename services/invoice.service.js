@@ -1,7 +1,7 @@
 const invoiceModel = require("../db/models/invoice.db");
 
 module.exports = {
-    getInvoice: (num) => {
-        return invoiceModel.getInvoice(num);
+    getInvoices: (num) => {
+        return invoiceModel.getInvoices(num);
     }
 };
