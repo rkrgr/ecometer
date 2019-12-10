@@ -9,7 +9,7 @@ module.exports = {
     },
     invoices: async (req, res) => {
         const invoices = await invoiceService.getInvoices(2);
-        res.render('invoice', {
+        res.render('invoices', {
             invoices
         });
     }
