@@ -26,25 +26,31 @@ module.exports = {
     getInvoices: (num) => {
         return [
             {
-                invoiceName: "1",
-                emissionFactor: 474,
-                invoiceValue: 400000,
-                dateStart: moment("2018-12-03"),
-                dateEnd: moment("2019-12-03")
+                rechnung_ID: "1",
+                rechnung_emissionsfaktor: 474,
+                rechnung_verbrauchswert: 400000,
+                rechnungsdaten_startdatum: moment("2018-12-03"),
+                rechnung_enddatum: moment("2019-12-03"),
+                fk_rechn_einheit: "kWh",
+                fk_rechn_kategorie: "Energie"
             },
             {
-                invoiceName: "2",
-                emissionFactor: 500,
-                invoiceValue: 10000,
-                dateStart: moment("2018-06-17"),
-                dateEnd: moment("2019-06-17")
+                rechnung_ID: "2",
+                rechnung_emissionsfaktor: 500,
+                rechnung_verbrauchswert: 10000,
+                rechnungsdaten_startdatum: moment("2018-06-17"),
+                rechnung_enddatum: moment("2019-06-17"),
+                fk_rechn_einheit: "kWh",
+                fk_rechn_kategorie: "Energie"
             },
             {
-                invoiceName: "3",
-                emissionFactor: 308,
-                invoiceValue: 5000000,
-                dateStart: moment("2018-04-12"),
-                dateEnd: moment("2019-01-05")
+                rechnung_ID: "3",
+                rechnung_emissionsfaktor: 308,
+                rechnung_verbrauchswert: 5000000,
+                rechnungsdaten_startdatum: moment("2018-04-12"),
+                rechnung_enddatum: moment("2019-01-05"),
+                fk_rechn_einheit: "kWh",
+                fk_rechn_kategorie: "Energie"
             }
         ];
     }
