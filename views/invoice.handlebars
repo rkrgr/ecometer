@@ -7,37 +7,37 @@
     <tbody>
         <tr>
             <td>
-                <span>Id</span>
+                <span>Kategorie</span>
             </td>
             <td>
-                <span>Value 1</span>
+                <span>Verbrauchswert</span>
             </td>
             <td>
-                <span>Value 2</span>
+                <span>Emissionsfaktor</span>
             </td>
             <td>
-                <span>Date 1</span>
+                <span>Start-Datum</span>
             </td>
             <td>
-                <span>Date 2</span>
+                <span>End-Datum</span>
             </td>
         </tr>
         {{#each invoices}}
         <tr>
             <td>
-                <span>{{this.invoiceName}}</span>
+                <span>{{this.fk_rechn_kategorie}}</span>
             </td>
             <td>
-                <span>{{this.invoiceValue}}</span>
+                <span>{{this.rechnung_verbrauchswert}} {{this.fk_rechn_einheit}}</span>
             </td>
             <td>
-                <span>{{this.emissionFactor}}</span>
+                <span>{{this.rechnung_emissionsfaktor}}</span>
             </td>
             <td>
-                <span>{{formatDateTime this.dateStart}}</span>
+                <span>{{formatDateTime this.rechnungsdaten_startdatum}}</span>
             </td>
             <td>
-                <span>{{formatDateTime this.dateEnd}}</span>
+                <span>{{formatDateTime this.rechnung_enddatum}}</span>
             </td>
         </tr>
         {{/each}}
