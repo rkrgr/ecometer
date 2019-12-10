@@ -1,12 +1,12 @@
-/*
+
 const moment = require("moment")
 
 const db = require('../connection')
 
 module.exports = {
-    getInvoices: (id) => {
+    getInvoice: (id) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE id=?', id, (err, rows) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE rechnung_ID= ?', id, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -15,10 +15,22 @@ module.exports = {
             })
         })
     },
+    getInvoices: (num) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM tbl_rechnung ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    },
 }
-*/
 
 
+
+/*
 
 const moment = require("moment");
 
@@ -55,3 +67,4 @@ module.exports = {
         ];
     }
 };
+*/
