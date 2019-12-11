@@ -1,24 +1,29 @@
+
 <h1>Massnahmen bearbeiten</h1>
-<table id="table" border="3" cellpadding="5">
-                <thead>
-                    <tr>
-                        <th>Ma&szlignahme</th>
-                        <th>Kategorie</th>
-                        <th>Einsparung CO2 in t/a</th>
-                        <th>Einsparung Energie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Photovoltaikanlagen</td>
-                        <td>Energie</td>
-                        <td>10</td>
-                        <td>20000 kWh</td>
-                        <td>
-                            <a class="far fa-edit"></a>
-                            <a class="fas fa-trash"></a>
-                        </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
+
+
+<table class="ticker">
+    <thead>
+        <tr>
+            <th colspan="2">Massnahmen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each measures}}
+        <tr>
+            <td>
+                
+            </td>
+            <td rowspan="2">
+                <span>{{this.name}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>{{this.companyId}}</span>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+

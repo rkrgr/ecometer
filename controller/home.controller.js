@@ -1,4 +1,4 @@
-const measureService = require("../services/measure.service");
+const measureService = require("../services/measures.service");
 
 module.exports = {
     index: async (req, res) => {

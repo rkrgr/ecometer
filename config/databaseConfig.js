@@ -3,5 +3,5 @@ module.exports ={
     host:'localhost',
     user:'root',
     passwort:'',
-    database:'db_ecometer'
+    database:'ecometerdb'
 }

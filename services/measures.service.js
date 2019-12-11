@@ -1,4 +1,4 @@
-const measureModel= require("../");
+const measureModel= require("../db/models/measures.db");
 module.exports = {
     getAllMeasures:(num)=>{
         return new Promise(async(resolve, reject)=>{
