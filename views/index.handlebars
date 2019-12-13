@@ -1,11 +1,11 @@
 
-<h1>Massnahmen bearbeiten</h1>
+<h1>Maßnahmen bearbeiten</h1>
 
 
 <table class="ticker">
     <thead>
         <tr>
-            <th colspan="2">Massnahmen bearbeiten</th>
+            <th colspan="2">Maßnahmen</th>
         </tr>
     </thead>
     <tbody>
@@ -20,8 +20,15 @@
             <td>
                 <span>{{this.co2Value}}</span>
             </td>
+            <td>
+                <button type="button" id="edit">Maßnahme bearbeiten</button>
+             </td>
+             <td>
+                 <button type="button" id="delete">Maßnahme löschen</button>
+              </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<button type="button" id="new">Maßnahme hinzufügen</button>
 
