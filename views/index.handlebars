@@ -8,15 +8,15 @@
         {{#each measures}}
         <tr>
             <td>
-                <span>{{formatDateTime this.date}}</span>
+                <span>{{formatDateTime this.timestamp}}</span>
             </td>
             <td rowspan="2">
-                <span>{{this.measureName}}</span>
+                <span>{{this.name}}</span>
             </td>
         </tr>
         <tr>
             <td>
-                <span>{{this.companyName}}</span>
+                <span>{{this.companyId}}</span>
             </td>
         </tr>
         {{/each}}
