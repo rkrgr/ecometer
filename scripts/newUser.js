@@ -1,0 +1,28 @@
+/*
+This is a script to generate a new company user with a placeholder name and a password, 
+that is written to the database with its hashed password.
+Username and password is put out to the console.
+*/
+
+function generateRandomString(length) {
+    var result           = ''
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    var charactersLength = characters.length
+    for (var i = 0; i < length; i++) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    }
+    return result
+ }
+
+const companyService = require('../services/company.service')
+
+const name = generateRandomString(8)
+const password = generateRandomString(8)
+
+const bcrypt = require('bcryptjs')
+
+companyService.addCompany(name, bcrypt.hashSync(password))
+
+console.log(`Companyname: ${name} - Password: ${password}`)
+
+process.exit()
