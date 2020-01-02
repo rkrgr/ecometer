@@ -8,5 +8,5 @@ module.exports = {
             successRedirect: '/',
             failureRedirect: '/login',
             failureFlash: true
-    })
+        })
 }

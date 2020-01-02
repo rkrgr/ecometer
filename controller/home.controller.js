@@ -4,6 +4,7 @@ module.exports = {
     index: async (req, res) => {
             const measures = await measureService.getLatestMeasures(3);
             res.render('index', {
+                user: req.user,
                 measures
             });
     }
