@@ -18,5 +18,14 @@ module.exports = {
             }
             resolve(measures)
         })
+    },
+    getAllMeasures: (num) => {
+        return new Promise(async (resolve, reject) => {
+            const allMeasures = await measureModel.getAllMeasures(num)
+            if (allMeasures === undefined) {
+                reject('Could not read latest measures from database.')
+            }
+            resolve(allMeasures)
+        })
     }
 };
