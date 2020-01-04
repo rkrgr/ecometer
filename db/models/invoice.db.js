@@ -3,10 +3,12 @@ const moment = require("moment")
 
 const db = require('../connection')
 
+const tableName = 'tbl_rechnung'
+
 module.exports = {
     getInvoice: (id) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE rechnung_ID= ?', id, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID= ?', id, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -17,7 +19,7 @@ module.exports = {
     },
     getInvoices: (num) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -47,46 +49,31 @@ module.exports = {
                 }
             })
         })
+    },
+    insertInvoice: (invoice) => {
+        return new Promise((resolve, reject) => {
+            db.query('INSERT INTO ' + tableName + ' (rechnung_verbrauchswert, rechnung_emissionsfaktor, rechnungsdaten_startdatum, rechnung_enddatum, fk_rechn_einheit, fk_rechn_unternehmen, fk_rechn_kategorie) VALUES (?,?,?,?,?,?,?)',
+                [invoice.name, invoice.emissionfactor, invoice.startdate.format('YYYY-MM-DD'), invoice.enddate.format('YYYY-MM-DD'), 1, invoice.companyId, 1], (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result.insertId)
+                    }
+                })
+        })
+    },
+    deleteinvoice: (id) => {
+        return new Promise((resolve, reject) => {
+            db.query('DELETE FROM ' + tableName + ' WHERE rechnung_ID=?', id, (err, result) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(result.affectedRows)
+                }
+            })
+        })
     }
 }
 
 
 
-/*
-
-const moment = require("moment");
-
-module.exports = {
-    getInvoices: (num) => {
-        return [
-            {
-                rechnung_ID: "1",
-                rechnung_emissionsfaktor: 474,
-                rechnung_verbrauchswert: 400000,
-                rechnungsdaten_startdatum: moment("2018-12-03"),
-                rechnung_enddatum: moment("2019-12-03"),
-                fk_rechn_einheit: "kWh",
-                fk_rechn_kategorie: "Energie"
-            },
-            {
-                rechnung_ID: "2",
-                rechnung_emissionsfaktor: 500,
-                rechnung_verbrauchswert: 10000,
-                rechnungsdaten_startdatum: moment("2018-06-17"),
-                rechnung_enddatum: moment("2019-06-17"),
-                fk_rechn_einheit: "kWh",
-                fk_rechn_kategorie: "Energie"
-            },
-            {
-                rechnung_ID: "3",
-                rechnung_emissionsfaktor: 308,
-                rechnung_verbrauchswert: 5000000,
-                rechnungsdaten_startdatum: moment("2018-04-12"),
-                rechnung_enddatum: moment("2019-01-05"),
-                fk_rechn_einheit: "kWh",
-                fk_rechn_kategorie: "Energie"
-            }
-        ];
-    }
-};
-*/
