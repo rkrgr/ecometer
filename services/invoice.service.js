@@ -49,5 +49,25 @@ module.exports = {
                 reject(e);
             }
         })
+    },
+    insertInvoice: (invoice) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const insertInvoice = await invoiceModel.insertInvoice(invoice)
+                resolve(insertInvoice)
+            } catch(e) {
+                reject(e)
+            }
+        })
+    },
+    deleteInvoice: (id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const deleteInvoice = await invoiceModel.deleteinvoice(id)
+                resolve(deleteInvoice)
+            } catch(e) {
+                reject(e)
+            }
+        })
     }
 };
