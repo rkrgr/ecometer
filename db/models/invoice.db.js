@@ -17,6 +17,7 @@ module.exports = {
             })
         })
     },
+    /*
     getInvoices: (num) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM ' + tableName + ' ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
@@ -39,9 +40,11 @@ module.exports = {
             })
         })
     },
-    getInvoicesOrderedByEnddateAsc: () => {
+    */
+    
+    getInvoices: (num) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung ORDER BY rechnung_enddatum', (err, rows) => {
+            db.query('SELECT * FROM tbl_rechnung ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
