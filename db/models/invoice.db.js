@@ -23,7 +23,18 @@ module.exports = {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve(rows)
+                    let results = []
+                    rows.forEach((row) => {
+                        results.push({
+                            //name: row.rechnung_name?
+                            verbrauchswert: row.rechnung_verbrauchswert,
+                            emissionfactor: row.rechnung_emissionsfaktor,
+                            startdate: row.rechnungsdaten_startdatum,
+                            enddate: row.rechnung_enddatum
+
+                        })
+                    })
+                    resolve(results)
                 }
             })
         })
