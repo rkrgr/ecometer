@@ -5,6 +5,7 @@ module.exports = {
             const latestMeasures = await measureService.getLatestMeasures(3);
             const bestMeasures = await measureService.getBestMeasures(3);
             res.render('index', {
+                user: req.user,
                 latestMeasures,
                 bestMeasures
             });
