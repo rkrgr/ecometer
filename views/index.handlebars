@@ -9,14 +9,14 @@
     <a href="/login">Login</a>
 </div>
 {{/if}}
-<table class="ticker">
+<table class="newsTicker">
     <thead>
         <tr>
             <th colspan="2">News-Ticker</th>
         </tr>
     </thead>
     <tbody>
-        {{#each measures}}
+        {{#each latestMeasures}}
         <tr>
             <td>
                 <span>{{formatDateTime this.timestamp}}</span>
@@ -28,6 +28,33 @@
         <tr>
             <td>
                 <span>{{this.companyId}}</span>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<table id="bestMeasures">
+    <thead>
+        <tr>
+            <th colspan="2">Beste Maßnahmen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each bestMeasures}}
+        <tr>
+            <td>
+                <span>{{formatDateTime this.timestamp}}</span>
+            </td>
+            <td>
+                <span>{{this.name}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>{{this.companyId}}</span>
+            </td>
+            <td>
+                <span>{{this.co2Einsparung}} t CO2 eingespart</span>
             </td>
         </tr>
         {{/each}}

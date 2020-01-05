@@ -9,5 +9,14 @@ module.exports = {
             }
             resolve(latestMeasures)
         })
+    },
+    getBestMeasures: (num) => {
+        return new Promise(async (resolve, reject) => {
+            const measures = await measureModel.getBestMeasures(num)
+            if (measures === undefined) {
+                reject('Could not read best measures from database.')
+            }
+            resolve(measures)
+        })
     }
 };

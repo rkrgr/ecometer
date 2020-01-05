@@ -35,6 +35,26 @@ module.exports = {
             })
         })
     },
+    getBestMeasures: (num) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM ' + tableName + ' ORDER BY massnahme_co2einsparung DESC LIMIT ?', num, (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    let results = []
+                    rows.forEach((row) => {
+                        results.push({
+                            name: row.massnahme_name,
+                            timestamp: row.massnahme_datum,
+                            companyId: row.fk_mass_unternehmen,
+                            co2Einsparung: row.massnahme_co2einsparung
+                        })
+                    })
+                    resolve(results)
+                }
+            })
+        })
+    },
     insertMeasure: (measure) => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_co2einsparung, massnahme_datum, fk_mass_unternehmen, fk_mass_einheit, fk_mass_kategorie, massnahme_offentlich) VALUES (?,?,?,?,?,?,?)',
