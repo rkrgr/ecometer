@@ -38,10 +38,10 @@ module.exports = {
             })
         })
     },
-    addCompany: (name, password) => {
+    addCompany: (name, mail, password) => {
         return new Promise((resolve, reject) => {
-            db.query('INSERT INTO ' + tableName + ' (unternehmen_name, unternehmen_passwort) VALUES (?,?);',
-                [name, password],
+            db.query('INSERT INTO ' + tableName + ' (unternehmen_name, unternehmen_mail, unternehmen_passwort) VALUES (?,?,?);',
+                [name, mail, password],
                 (err, result) => {
                     if (err) {
                         reject(err)

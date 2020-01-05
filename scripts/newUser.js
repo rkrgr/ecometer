@@ -18,12 +18,13 @@ function generateRandomString(length) {
 const companyService = require('../services/company.service')
 
 const name = generateRandomString(8)
+const mail = generateRandomString(8) + '@mail.com'
 const password = generateRandomString(8);
 
 (async () => {
    try {
-      await companyService.addCompany(name, bcrypt.hashSync(password))
-      console.log(`Companyname: ${name} - Password: ${password}`)
+      await companyService.addCompany(name, mail, bcrypt.hashSync(password))
+      console.log(`Companyname: ${name} - Mail: ${mail} - Password: ${password}`)
    } catch (e) {
       console.log(e)
    }

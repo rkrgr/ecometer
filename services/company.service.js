@@ -21,10 +21,10 @@ module.exports = {
             }
         })
     },
-    addCompany: (name, password) => {
+    addCompany: (name, mail, password) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const insertId = await companyModel.addCompany(name, password)
+                const insertId = await companyModel.addCompany(name, mail, password)
                 resolve(insertId)
             } catch(e) {
                 reject(e)
