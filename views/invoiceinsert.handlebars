@@ -1,0 +1,52 @@
+<form method="POST" action="/invoice/invoiceinsert">
+    <table class="invoiceInsert">
+        <thead>
+            <tr>
+                <th colspan="6">Rechnungen</th>
+            </tr>
+            <tr>
+                <th>
+                    <span>Kategorie</span>
+                </th>
+                <th>
+                    <span>Verbrauchswert</span>
+                </th>
+                <th>
+                    <span>Einheit</span>
+                </th>
+                <th>
+                    <span>Emissionsfaktor</span>
+                </th>
+                <th>
+                    <span>Start-Datum</span>
+                </th>
+                <th>
+                    <span>End-Datum</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="text" id="fk_rechn_kategorie" size="20" value="4">
+                </td>
+                <td>
+                    <input type="text" id="rechnung_verbrauchswert" size="20" value="200">
+                </td>
+                <td>
+                    <input type="text" id="fk_rechn_einheit" size="20"value="2">
+                </td>                
+                <td>
+                    <input type="text" id="rechnung_emissionsfaktor" size="20" value="1">
+                </td>
+                <td>
+                    <input type="text" id="rechnungsdaten_startdatum" size="20" value="11.12.2013">
+                </td>
+                <td>
+                    <input type="text" id="rechnung_enddatum" size="20" value="20.01.2012">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <P><input type="submit" value="Senden" name="invoice"></P>
+</form>

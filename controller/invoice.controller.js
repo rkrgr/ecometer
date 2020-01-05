@@ -13,14 +13,17 @@ module.exports = {
             invoices
         });
     },
+    invoice_insert_index: async (req, res) => {
+        res.render('invoiceinsert')
+    },
     invoice_insert: async (req, res) => {
-        const invoices = await invoiceService.insertInvoice(1); //attention id alleady exists
+        const insertInvoice = await invoiceService.insertInvoice(7); //attention id alleady exists
         res.render('insertinvoice', {
             insertInvoice
         });
     },
     invoice_delete: async (req, res) => {
-        const invoices = await invoiceService.deleteInvoice(1); // attention id allready existsy -> alternation of database
+        const invoicedelete = await invoiceService.deleteInvoice(1); // attention id allready existsy -> alternation of database
         res.render('deleteinvoice', {
             invoicedelete
         });

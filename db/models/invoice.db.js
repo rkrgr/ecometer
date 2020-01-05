@@ -65,9 +65,10 @@ module.exports = {
         })
     },
     insertInvoice: (invoice) => {
+        console.log("db angesprochen");
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (rechnung_verbrauchswert, rechnung_emissionsfaktor, rechnungsdaten_startdatum, rechnung_enddatum, fk_rechn_einheit, fk_rechn_unternehmen, fk_rechn_kategorie) VALUES (?,?,?,?,?,?,?)',
-                [invoice.name, invoice.emissionfactor, invoice.startdate.format('YYYY-MM-DD'), invoice.enddate.format('YYYY-MM-DD'), 1, invoice.companyId, 1], (err, result) => {
+                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum.format('YYYY-MM-DD'), invoice.rechnung_enddatum.format('YYYY-MM-DD'), invoice.fk_rechn_einheit, invoice.fk_rechn_unternehmen, invoice.fk_rechn_kategorie], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {
