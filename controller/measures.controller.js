@@ -1,4 +1,4 @@
-const allMeasuresService = require("../services/measure.service");
+const measuresService = require("../services/measures.service");
 
 module.exports = {
     index: async (req, res) => {
@@ -7,7 +7,7 @@ module.exports = {
                 allMeasures
             });
     },
-    {
+    
         index: async (req, res) => {
                 
                 res.render('createMeasures');
