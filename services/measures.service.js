@@ -1,4 +1,4 @@
-const measureModel = require("../db/models/measure.db");
+const measureModel = require("../db/models/measures.db");
 
 module.exports = {
     getLatestMeasures: (num) => {
