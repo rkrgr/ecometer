@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const createMeasuresController = require('../controller/allMeasures.controller');
+const createMeasuresController = require('../controller/createMeasures.controller');
 
 router.get('/', createMeasuresController.index);
 
