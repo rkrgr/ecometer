@@ -33,8 +33,9 @@ module.exports = {
         //res.render('insertinvoice', {
         //    insertInvoice
         //});
-        res.redirect(307, '/test');
-        ///res.send({redirect: '/'});
+        //res.redirect(307, '/test');
+        //res.send({redirect: '/invoice/invoiceinsert'});
+        res.redirect('../invoice/invoiceinsert')
     },
     invoice_delete: async (req, res) => {
         const invoicedelete = await invoiceService.deleteInvoice(1);
