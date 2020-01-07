@@ -9,6 +9,9 @@
     <a href="/login">Login</a>
 </div>
 {{/if}}
+<div id="historyChartContainer">
+    <canvas id="historyChart" width="600" height="400"></canvas>
+</div>
 <table class="newsTicker">
     <thead>
         <tr>
@@ -60,3 +63,6 @@
         {{/each}}
     </tbody>
 </table>
+<input id="historyMapValues" type="hidden" value="{{historyMap}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="/js/historyChart.js"></script>
