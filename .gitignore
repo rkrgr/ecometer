@@ -1,3 +1,4 @@
 node_modules
 config/databaseConfig.js
+.idea
 
