@@ -15,13 +15,13 @@ module.exports = {
                
         },
         measure_insert:async (req, res)=>{
-            var measure_add = {}
-
-        measure_add.massnahme_name=req.body.myMassnahme;
-        measure_add.massnahme_absoluteeinsaprung=req.body.myGroesse;
-        measure_add.tbl_kategorie_einheit=req.body.myEinheit;
-        measure_add.massnahme_co2einsparung=req.body.Co2;
-        measure_add.tbl_kategorie_einheit=req.body.myEinheit
+            var measure = {}
+            
+        measure.massnahme_name=req.body.massnahme_name;
+        measure.massnahme_absoluteeinsaprung=req.body.massnahme_absoluteeinsaprung;
+        measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
+        measure.massnahme_co2einsparung=req.body.massnahme_co2einsparung;
+        measure.tbl_kategorie_einheit=req.body.fk_mass_einheit
 
         
 

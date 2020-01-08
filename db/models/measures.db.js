@@ -90,12 +90,12 @@ module.exports = {
     insertMeasure: (measure) => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_co2einsparung,massnahme_absoluteeinsaprung, massnahme_datum, fk_mass_unternehmen, fk_mass_einheit, fk_mass_kategorie, massnahme_offentlich) VALUES (?,?,?,?,?,?,?,?)',
-                [measure.name, measure.co2Saving, measure.timestamp.format('YYYY-MM-DD'), measure.companyId, 1, 1, true], (err, result) => {
+                [measure.massnahme_name, measure.massnahme_co2einsparung,measure.massnahme_absoluteeinsaprung, measure.massnahme_datum.format('YYYY-MM-DD'), measure.fk_mass_unternehmen, 1, 1,measure.fk_mass_einheit,measure.fk_mass_kategorie,measure.massnahme_offentlich, true], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {
-                        //resolve(result.insertId)
-                        resolve(results)
+                        resolve(result.insertId)
+                        console.log("Daten an DB schicken");
                     }
                 })
         })

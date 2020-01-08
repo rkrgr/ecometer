@@ -22,22 +22,23 @@
     </tr>
     </thead>
     <tbody>
+        
     {{#each allMeasures}}
         <tr>
             <td>
-                <span>{{this.name}}</span>
+                <span>{{this.massnahme_name}}</span>
             </td>
             <td>
-                <span>{{this.kategorie}}</span>
+                <span>{{this.fk_mass_kategorie}}</span>
             </td>
             <td>
-                <span>{{this.co2einsparung}}</span>
+                <span>{{this.massnahme_co2einsparung}}</span>
             </td>
             <td>
-                <span>{{this.absoluteeinsparung}}</span>
+                <span>{{this.massnahme_absoluteeinsaprung}}</span>
             </td>
             <td>
-                <span>{{formatDateTime this.timestamp}}</span>
+                <span>{{formatDateTime this.massnahme_datum}}</span>
             </td>
         </tr>
     {{/each}}    
