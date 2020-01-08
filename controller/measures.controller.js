@@ -22,8 +22,13 @@ module.exports = {
         measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
         measure.massnahme_co2einsparung=req.body.massnahme_co2einsparung;
         measure.tbl_kategorie_einheit=req.body.fk_mass_einheit
-
-        
+        const insertMeasure = await measuresService.insertMeasure(measure);
+        //res.render('insertinvoice', {
+        //    insertInvoice
+        //});
+        //res.redirect(307, '/test');
+        //res.send({redirect: '/invoice/invoiceinsert'});
+        res.redirect('../measure/createMeasure')        
 
         }
         
