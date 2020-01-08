@@ -89,12 +89,13 @@ module.exports = {
     },
     insertMeasure: (measure) => {
         return new Promise((resolve, reject) => {
-            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_co2einsparung, massnahme_datum, fk_mass_unternehmen, fk_mass_einheit, fk_mass_kategorie, massnahme_offentlich) VALUES (?,?,?,?,?,?,?)',
+            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_co2einsparung,massnahme_absoluteeinsaprung, massnahme_datum, fk_mass_unternehmen, fk_mass_einheit, fk_mass_kategorie, massnahme_offentlich) VALUES (?,?,?,?,?,?,?,?)',
                 [measure.name, measure.co2Saving, measure.timestamp.format('YYYY-MM-DD'), measure.companyId, 1, 1, true], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {
-                        resolve(result.insertId)
+                        //resolve(result.insertId)
+                        resolve(results)
                     }
                 })
         })
