@@ -1,4 +1,7 @@
 const measuresService = require("../services/measures.service");
+//const format = require("moment-format");
+const moment = require("moment");
+
 
 module.exports = {
     allMeasures: async (req, res) => {
@@ -21,7 +24,8 @@ module.exports = {
         measure.massnahme_absoluteeinsaprung=req.body.massnahme_absoluteeinsaprung;
         measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
         measure.massnahme_co2einsparung=req.body.massnahme_co2einsparung;
-        measure.tbl_kategorie_einheit=req.body.fk_mass_einheit
+        measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
+        console.log(measure);
         const insertMeasure = await measuresService.insertMeasure(measure);
         //res.render('insertinvoice', {
         //    insertInvoice
