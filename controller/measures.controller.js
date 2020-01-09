@@ -19,14 +19,18 @@ module.exports = {
         },
         measure_insert:async (req, res)=>{
             var measure = {}
-            
+            console.log(measure);
+            const insertMeasure = await measuresService.insertMeasure(measure);
+
         measure.massnahme_name=req.body.massnahme_name;
         measure.massnahme_absoluteeinsaprung=req.body.massnahme_absoluteeinsaprung;
-        measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
+        //measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
         measure.massnahme_co2einsparung=req.body.massnahme_co2einsparung;
         measure.tbl_kategorie_einheit=req.body.fk_mass_einheit;
-        console.log(measure);
-        const insertMeasure = await measuresService.insertMeasure(measure);
+        measure.massnahme_datum.format('YYYY-MM-DD')="02.11.2019";
+        measure.fk_mass_unternehmen="1";
+
+        
         //res.render('insertinvoice', {
         //    insertInvoice
         //});
