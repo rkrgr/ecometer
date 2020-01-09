@@ -1,14 +1,38 @@
-const express = require('express');
-const exphbs = require('express-handlebars');
+const express = require('express')
+const exphbs = require('express-handlebars')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
+const initializePassport = require('./config/passport-config')
+const companyService = require('./services/company.service')
 
-const app = express();
+const app = express()
 
 // Handlebars Middleware
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+app.engine('handlebars', exphbs({ 
+    defaultLayout: 'main',
+    helpers: require('./config/handlebarsHelpers')
+ }))
+app.set('view engine', 'handlebars')
 
-app.use('/', require('./routes/index.js'));
+initializePassport(
+    passport,
+    companyService.getCompanyByName,
+    companyService.getCompanyById
+)
 
-const PORT = process.env.PORT || 5000;
+app.use(express.urlencoded({ extended: false }))
+app.use(flash())
+app.use(session({
+    secret: 'tempSecret',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.use('/', require('./routes/index.router'))
+
+module.exports = app

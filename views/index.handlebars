@@ -1,1 +1,24 @@
-<h1>Ecometer Startseite</h1>
+<table class="ticker">
+    <thead>
+        <tr>
+            <th colspan="2">News-Ticker</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each measures}}
+        <tr>
+            <td>
+                <span>{{formatDateTime this.timestamp}}</span>
+            </td>
+            <td rowspan="2">
+                <span>{{this.name}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>{{this.companyId}}</span>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

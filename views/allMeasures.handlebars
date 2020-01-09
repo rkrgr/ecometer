@@ -1,0 +1,45 @@
+<table class="measures">
+    <thead>
+    <tr>
+        <th colspan="5">Maßnahmen</th>
+    </tr>
+    <tr>
+        <th>
+            <span>Maßnahme</span>
+        </th>
+        <th>
+            <span>Kategorie</span>
+        </th>
+        <th>
+            <span>Einsparung CO2 in t/a</span>
+        </th>
+        <th>
+            <span>Einsparung Energie</span>
+        </th>
+        <th>
+            <span>Datum</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each allMeasures}}
+        <tr>
+            <td>
+                <span>{{this.name}}</span>
+            </td>
+            <td>
+                <span>{{this.kategorie}}</span>
+            </td>
+            <td>
+                <span>{{this.co2einsparung}}</span>
+            </td>
+            <td>
+                <span>{{this.absoluteeinsparung}}</span>
+            </td>
+            <td>
+                <span>{{formatDateTime this.timestamp}}</span>
+            </td>
+        </tr>
+    {{/each}}    
+    </tbody>
+</table>
