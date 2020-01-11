@@ -19,7 +19,7 @@ app.set('view engine', 'handlebars')
 
 initializePassport(
     passport,
-    companyService.getCompanyByName,
+    companyService.getCompanyByEMail,
     companyService.getCompanyById
 )
 

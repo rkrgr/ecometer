@@ -21,6 +21,16 @@ module.exports = {
             }
         })
     },
+    getCompanyByEMail: (email) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const company = await companyModel.getCompanyByEMail(email)
+                resolve(company)
+            } catch(e) {
+                reject(e)
+            }
+        })
+    },
     addCompany: (name, mail, password) => {
         return new Promise(async (resolve, reject) => {
             try {
