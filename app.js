@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/public'))
 
 initializePassport(
     passport,
-    companyService.getCompanyByName,
+    companyService.getCompanyByEMail,
     companyService.getCompanyById
 )
 

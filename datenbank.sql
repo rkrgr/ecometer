@@ -237,7 +237,7 @@ CREATE TABLE `tbl_unternehmen` (
   `unternehmen_ID` int(11) NOT NULL AUTO_INCREMENT,
   `unternehmen_name` varchar(45) COLLATE utf8mb4_german2_ci NOT NULL,
   `unternehmen_passwort` varchar(120) COLLATE utf8mb4_german2_ci NOT NULL,
-  `unternehmen_mail` varchar(45) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `unternehmen_mail` varchar(45) COLLATE utf8mb4_german2_ci DEFAULT NOT NULL,
   `unternehmen_beschreibung` longtext COLLATE utf8mb4_german2_ci,
   PRIMARY KEY (`unternehmen_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
