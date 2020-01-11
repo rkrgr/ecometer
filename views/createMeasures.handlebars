@@ -1,7 +1,7 @@
 
 <h1>Maßnahmen eintragen</h1>
 
-<form action="/measures" method="POST">
+<form action="/measures/createMeasures" method="POST">
     <h5>Bitte wählen Sie eine Kategorie aus: </h5>
         <table>
             
@@ -17,7 +17,7 @@
 
 <table>
             <tr>
-                <td>Ma&szlig;nahme </td>
+                <td>Ma&szlig;nahmen </td>
                 <td>Größe</td>
                 <td>Einheit</td>
                 <td>CO&sup2; Einsparung</td>
@@ -26,7 +26,7 @@
             <tr>
                 
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
-                <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="5"></td>
+                <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
                 <td> <select id="frei" name ="fk_mass_einheit">
                         <option value="none" selected="true">-</option>
                         <option value="warm">kWh</option>
