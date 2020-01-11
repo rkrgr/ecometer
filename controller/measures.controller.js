@@ -5,16 +5,16 @@ const moment = require("moment");
 
 module.exports = {
         allMeasures: async (req, res) => {
+                
                 const allMeasures = await measuresService.getAllMeasures(3);
+                
                 res.render('allMeasures', {
                     allMeasures
                 });
         },
     
         createMeasures: async (req, res) => {
-                
                 res.render('createMeasures');
-               
         },
 
         measure_insert:async (req, res)=>{

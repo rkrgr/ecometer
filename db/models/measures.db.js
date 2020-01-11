@@ -39,19 +39,21 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM ' + tableName + ' ORDER BY massnahme_datum DESC LIMIT ?', num, (err, rows) => {
                 if (err) {
+                    console.log('SELECT allMeasures funzt nicht');
                     reject(err)
                 } else {
                     let results = []
                     rows.forEach((row) => {
                         results.push({
-                            name: row.massnahme_name,
-                            kategorie:row.fk_mass_kategorie,
-                            co2einsparung:row.massnahme_co2einsparung,
-                            absoluteeinsparung:row.massnahme_absoluteeinsparung,
-                            timestamp: row.massnahme_datum
+                            massnahme_name: row.massnahme_name,
+                            fk_mass_kategorie: row.fk_mass_kategorie,
+                            massnahme_co2einsparung: row.massnahme_co2einsparung,
+                            massnahme_absoluteeinsparung: row.massnahme_absoluteeinsparung,
+                            massnahme_datum: row.massnahme_datum
 
                         })
                     })
+                    console.log('getallMeasures db');
                     resolve(results)
                 }
             })
