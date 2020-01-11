@@ -48,7 +48,7 @@ module.exports = {
                             massnahme_name: row.massnahme_name,
                             fk_mass_kategorie: row.fk_mass_kategorie,
                             massnahme_co2einsparung: row.massnahme_co2einsparung,
-                            massnahme_absoluteeinsparung: row.massnahme_absoluteeinsparung,
+                            massnahme_absoluteeinsaprung: row.massnahme_absoluteeinsaprung,
                             massnahme_datum: row.massnahme_datum
 
                         })
@@ -78,7 +78,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             console.log("db angesprochen");
             db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_absoluteeinsaprung, massnahme_co2einsparung, fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen, massnahme_offentlich  ) VALUES (?,?,?,?,?,?,?,?)',
-                [measure.massnahme_name, '1990-08-09', measure.massnahme_absoluteeinsaprung,  //measure.massnahme_datum.format('YYYY-MM-DD')
+                [measure.massnahme_name, measure.massnahme_datum , measure.massnahme_absoluteeinsaprung,  //measure.massnahme_datum.format('YYYY-MM-DD')
                 measure.massnahme_co2einsparung, 1, 1, 1, true], (err, result) => {
                     if (err) {
                         console.log("!!Fehler beim INSERT");
