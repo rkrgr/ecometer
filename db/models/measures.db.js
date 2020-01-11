@@ -75,9 +75,9 @@ module.exports = {
     insertMeasure: (measure) => {
         return new Promise((resolve, reject) => {
             console.log("db angesprochen");
-            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_absoluteeinsaprung, massnahme_co2einsparung, fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen  ) VALUES (?,?,?,?,?,?,?)',
+            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_absoluteeinsaprung, massnahme_co2einsparung, fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen, massnahme_offentlich  ) VALUES (?,?,?,?,?,?,?,?)',
                 [measure.massnahme_name, '1990-08-09', measure.massnahme_absoluteeinsaprung,  //measure.massnahme_datum.format('YYYY-MM-DD')
-                measure.massnahme_co2einsparung, 1, 1, 1], (err, result) => {
+                measure.massnahme_co2einsparung, 1, 1, 1, true], (err, result) => {
                     if (err) {
                         console.log("!!Fehler beim INSERT");
                         reject(err)
