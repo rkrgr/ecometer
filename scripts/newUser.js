@@ -4,16 +4,7 @@ that is written to the database with its hashed password.
 Username and password is put out to the console.
 */
 const bcrypt = require('bcryptjs')
-
-function generateRandomString(length) {
-    var result           = ''
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    var charactersLength = characters.length
-    for (var i = 0; i < length; i++) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength))
-    }
-    return result
- }
+const generateRandomString = require('../util/generateRandomString')
 
 const companyService = require('../services/company.service')
 

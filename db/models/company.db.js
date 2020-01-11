@@ -63,5 +63,18 @@ module.exports = {
                     }
                 })
         })
+    },
+    updatePassword: (id, newPassword) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET unternehmen_passwort=? WHERE unternehmen_ID=?',
+            [newPassword, id],
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.affectedRows);
+                }
+            });
+        });
     }
 }
