@@ -19,5 +19,16 @@ module.exports = {
             }
             resolve(allMeasures)
         })
+    },
+    insertMeasure: (measure) => {
+        return new Promise(async (resolve, reject) => {
+            try{
+                const insertMeasure = await measureModel.insertMeasure(measure)
+                resolve(insertMeasure)
+            } catch(e) {
+                reject(e)
+            }
+            
+        })
     }
 };

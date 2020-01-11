@@ -57,12 +57,29 @@ module.exports = {
             })
         })
     },
+    /*insertMeasure: (measure) => {
+        return new Promise((resolve, reject) => {
+            console.log("db angesprochen");
+            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_offentlich) VALUES (?, ?, ?)',
+                [measure.massnahme_name, measure.massnahme_datum.format('YYYY-MM-DD'), true], (err, result) => {
+                    if (err) {
+                        console.log("Fehler beim INSERT");
+                        reject(err)
+                    } else {
+                        resolve(result.insertId)
+                        console.log("Daten an DB schicken");
+                    }
+                })
+        })
+    },*/
     insertMeasure: (measure) => {
         return new Promise((resolve, reject) => {
             console.log("db angesprochen");
-            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_co2einsparung,massnahme_absoluteeinsaprung, massnahme_datum, fk_mass_unternehmen, fk_mass_einheit, ) VALUES (?,?,?,?,?,?)',
-                [measure.massnahme_name, measure.massnahme_co2einsparung,measure.massnahme_absoluteeinsaprung, measure.massnahme_datum.format('YYYY-MM-DD'), measure.fk_mass_unternehmen, 1, 1,measure.fk_mass_einheit, true], (err, result) => {
+            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_absoluteeinsaprung, massnahme_co2einsparung, fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen  ) VALUES (?,?,?,?,?,?,?)',
+                [measure.massnahme_name, '1990-08-09', measure.massnahme_absoluteeinsaprung,  //measure.massnahme_datum.format('YYYY-MM-DD')
+                measure.massnahme_co2einsparung, 1, 1, 1], (err, result) => {
                     if (err) {
+                        console.log("!!Fehler beim INSERT");
                         reject(err)
                     } else {
                         resolve(result.insertId)
