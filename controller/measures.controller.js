@@ -39,7 +39,7 @@ module.exports = {
             //res.redirect(307, '/test');
             //res.send({redirect: '/invoice/invoiceinsert'});
             console.log(measure);
-            res.redirect('../measure')        
+            res.redirect('../measures')        
 
         }
         
