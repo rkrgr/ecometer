@@ -18,7 +18,8 @@
 <table>
             <tr>
                 <td>Ma&szlig;nahmen </td>
-                <td>Größe</td>
+                <td>Datum </td>
+                <td>Abs. Einsparung</td>
                 <td>Einheit</td>
                 <td>CO&sup2; Einsparung</td>
                 <td>Einheit</td>
@@ -26,7 +27,11 @@
             <tr>
                 
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
+                <td>
+                    <input type="text" name="massnahme_datum" size="20" value="2013-11-21">
+                </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
+                
                 <td> <select id="frei" name ="fk_mass_einheit">
                         <option value="none" selected="true">-</option>
                         <option value="warm">kWh</option>
