@@ -5,6 +5,21 @@
     <title>Ecometer</title>
 </head>
 <body>
+    <div class="nav">
+        {{#if user}}
+            <ul>
+                <li>
+                    <form action="/logout" method="GET">
+                        <a href="javascript:;" onclick="parentNode.submit();">Logout</a>
+                    </form>
+                </li>
+            </ul>
+        {{else}}
+        <div>
+            <a href="/login">Login</a>
+        </div>
+        {{/if}}
+    </div>
     <div class="container">
         {{{body}}}
     </div>

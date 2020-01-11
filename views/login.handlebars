@@ -4,12 +4,15 @@
 {{/if}}
 <form action="/login" method="POST">
     <div>
-        <label for="name">Firmenname</label>
-        <input type="text" id="name" name="name" required>
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" required>
     </div>
     <div>
         <label for="password">Passwort</label>
         <input type="password" id="password" name="password" required>
     </div>
     <input type="submit" value="Anmelden">
+</form>
+<form action="/resetPassword" method="GET">
+    <a href="javascript:;" onclick="parentNode.submit();">Passwort vergessen?</a>
 </form>
