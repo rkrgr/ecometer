@@ -1,6 +1,7 @@
 const companyModel = require("../db/models/company.db");
 const generateRandomString = require('../util/generateRandomString');
 const bcrypt = require('bcryptjs');
+const sendMail = require("../util/mailer");
 
 module.exports = {
     getCompanyById: (id) => {
@@ -43,13 +44,14 @@ module.exports = {
             }
         })
     },
-    resetPassword: (id) => {
+    resetPassword: (email) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const newPassword = generateRandomString(8);
-                console.log("New password: " + newPassword);
+                const company = await companyModel.getCompanyByEMail(email);
                 const hashedPassword = bcrypt.hashSync(newPassword);
-                await companyModel.updatePassword(id, hashedPassword);
+                await companyModel.updatePassword(company.id, hashedPassword);
+                sendMail(email, newPassword);
                 resolve();
             } catch (e) {
                 reject(e);

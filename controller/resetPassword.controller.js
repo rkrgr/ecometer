@@ -6,8 +6,7 @@ module.exports = {
     },
     resetPassword: async (req, res) => {
         const email = req.body.email;
-        const company = await companyService.getCompanyByEMail(email);
-        companyService.resetPassword(company.id);
+        companyService.resetPassword(email);
         res.redirect('/login');
     }
 }
