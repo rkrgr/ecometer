@@ -4,13 +4,13 @@ const moment = require("moment")
 
 module.exports = {
     invoice: async (req, res) => {
-        const invoice = await invoiceService.getInvoice(1);
+        const invoice = await invoiceService.getInvoice(1); // hidden field info
         res.render('invoice', {
             invoice
         });
     },
     invoices: async (req, res) => {
-        const invoices = await invoiceService.getInvoices(3); 
+        const invoices = await invoiceService.getInvoices(3); // hidden field info
         res.render('invoices', {
             invoices
         });
@@ -27,14 +27,9 @@ module.exports = {
         invoice.rechnung_emissionsfaktor = req.body.rechnung_emissionsfaktor;
         invoice.rechnungsdaten_startdatum = req.body.rechnungsdaten_startdatum;
         invoice.rechnung_enddatum = req.body.rechnung_enddatum;
-        invoice.fk_rechn_unternehmen = "1"; /////////////// attention
+        invoice.fk_rechn_unternehmen = "1"; // attention
         console.log(invoice);
         const insertInvoice = await invoiceService.insertInvoice(invoice);
-        //res.render('insertinvoice', {
-        //    insertInvoice
-        //});
-        //res.redirect(307, '/test');
-        //res.send({redirect: '/invoice/invoiceinsert'});
         res.redirect('../invoice/invoiceinsert')
     },
     invoice_delete: async (req, res) => {
