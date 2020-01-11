@@ -6,7 +6,7 @@ const moment = require("moment");
 module.exports = {
         allMeasures: async (req, res) => {
                 
-                const allMeasures = await measuresService.getAllMeasures(3);
+                const allMeasures = await measuresService.getAllMeasures(10);
                 
                 res.render('allMeasures', {
                     allMeasures
