@@ -10,9 +10,9 @@ module.exports = {
             resolve(invoice)
         }) 
     },
-    getInvoices: (num) => {
+    getInvoices: (companyId) => {
         return new Promise(async (resolve, reject) => {
-            const invoices = await invoiceModel.getInvoices(num)
+            const invoices = await invoiceModel.getInvoices(companyId)
             if (invoices === undefined) {
                 reject('Could not access invoice list')
             }
@@ -47,6 +47,26 @@ module.exports = {
                 resolve(result);
             } catch (e) {
                 reject(e);
+            }
+        })
+    },
+    insertInvoice: (invoice) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const insertInvoice = await invoiceModel.insertInvoice(invoice)
+                resolve(insertInvoice)
+            } catch(e) {
+                reject(e)
+            }
+        })
+    },
+    deleteInvoice: (id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const deleteInvoice = await invoiceModel.deleteinvoice(id)
+                resolve(deleteInvoice)
+            } catch(e) {
+                reject(e)
             }
         })
     }

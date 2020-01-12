@@ -1,7 +1,13 @@
 const router = require('express').Router();
 
+
 const invoiceController = require('../controller/invoice.controller');
 
-router.get('/', invoiceController.invoice);
+router.get('/', invoiceController.invoices);
+
+router.get('/insert', invoiceController.invoice_insert_index);
+router.post('/insert', invoiceController.invoice_insert);
+
+router.post('/delete/:invoiceId', invoiceController.invoiceDelete);
 
 module.exports = router;
