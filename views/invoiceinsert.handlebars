@@ -28,7 +28,11 @@
         <tbody>
             <tr>
                 <td>
-                    <input type="text" name="fk_rechn_kategorie" size="20" value="4">
+                    <select name="category">
+                        {{#each categories}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
                 </td>
                 <td>
                     <input type="text" name="rechnung_verbrauchswert" size="20" value="200">

@@ -1,4 +1,5 @@
 const invoiceService = require("../services/invoice.service")
+const categoryService = require("../services/category.service")
 const moment = require("moment")
 
 module.exports = {
@@ -15,7 +16,10 @@ module.exports = {
         });
     },
     invoice_insert_index: async (req, res) => {
-        res.render('invoiceinsert')
+        const categories = await categoryService.getCategories();
+        res.render('invoiceinsert', {
+            categories
+        });
     },
     invoice_insert: async (req, res) => {
         var invoice = {}
