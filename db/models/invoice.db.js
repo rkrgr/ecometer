@@ -80,7 +80,7 @@ module.exports = {
         console.log("db angesprochen");
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (rechnung_verbrauchswert, rechnung_emissionsfaktor, rechnungsdaten_startdatum, rechnung_enddatum, fk_rechn_einheit, fk_rechn_unternehmen, fk_rechn_kategorie) VALUES (?,?,?,?,?,?,?)',
-                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum, invoice.rechnung_enddatum, invoice.fk_rechn_einheit, invoice.fk_rechn_unternehmen, invoice.fk_rechn_kategorie], (err, result) => {
+                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum, invoice.rechnung_enddatum, invoice.unitId, invoice.fk_rechn_unternehmen, invoice.categoryId], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {

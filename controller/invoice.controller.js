@@ -1,5 +1,6 @@
 const invoiceService = require("../services/invoice.service")
 const categoryService = require("../services/category.service")
+const unitService = require("../services/unit.service")
 const moment = require("moment")
 
 module.exports = {
@@ -17,16 +18,18 @@ module.exports = {
     },
     invoice_insert_index: async (req, res) => {
         const categories = await categoryService.getCategories();
+        const unitsForCategoryMap = await unitService.getUnitsForCategory();
         res.render('invoiceinsert', {
-            categories
+            categories,
+            unitsForCategory: JSON.stringify(Array.from(unitsForCategoryMap.entries()))
         });
     },
     invoice_insert: async (req, res) => {
         var invoice = {}
 
-        invoice.fk_rechn_kategorie = req.body.fk_rechn_kategorie;
+        invoice.categoryId = req.body.category;
         invoice.rechnung_verbrauchswert = req.body.rechnung_verbrauchswert;
-        invoice.fk_rechn_einheit = req.body.fk_rechn_einheit;
+        invoice.unitId = req.body.unit;
         invoice.rechnung_emissionsfaktor = req.body.rechnung_emissionsfaktor;
         invoice.rechnungsdaten_startdatum = req.body.rechnungsdaten_startdatum;
         invoice.rechnung_enddatum = req.body.rechnung_enddatum;

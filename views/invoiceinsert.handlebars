@@ -1,3 +1,4 @@
+<input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
 <form method="POST" action="/invoice/invoiceinsert">
     <table class="invoiceInsert">
         <thead>
@@ -28,7 +29,7 @@
         <tbody>
             <tr>
                 <td>
-                    <select name="category">
+                    <select id="category" name="category" onchange="resetUnitSelect()">
                         {{#each categories}}
                             <option value="{{this.id}}">{{this.name}}</option>
                         {{/each}}
@@ -38,7 +39,8 @@
                     <input type="text" name="rechnung_verbrauchswert" size="20" value="200">
                 </td>
                 <td>
-                    <input type="text" name="fk_rechn_einheit" size="20"value="2">
+                    <select id="unit" name="unit">
+                    </select>
                 </td>                
                 <td>
                     <input type="text" name="rechnung_emissionsfaktor" size="20" value="1">
@@ -54,3 +56,22 @@
     </table>
     <P><input type="submit" value="Senden" name="invoice"></P>
 </form>
+<script>
+    let categorySelect = document.getElementById("category");
+    let unitSelect = document.getElementById("unit");
+    let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
+
+    function resetUnitSelect() {
+        unitSelect.options.length = 0;
+        let units = unitsForCategory.get(parseInt(categorySelect.value));
+        for(i = 0; i < units.length; i++) {
+            let unit = units[i];
+            let opt = document.createElement("option");
+            opt.value = unit.id;
+            opt.innerHTML = unit.name;
+            unitSelect.appendChild(opt);
+        }
+    }
+
+    resetUnitSelect();
+</script>
