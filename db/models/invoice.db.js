@@ -42,9 +42,9 @@ module.exports = {
     },
     */
     
-    getInvoices: (num) => {
+    getInvoices: (companyId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', companyId, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {

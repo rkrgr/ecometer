@@ -11,8 +11,9 @@ module.exports = {
         });
     },
     invoices: async (req, res) => {
-        const invoices = await invoiceService.getInvoices(3); // hidden field info
+        const invoices = await invoiceService.getInvoices(req.user.id);
         res.render('invoices', {
+            user: req.user,
             invoices
         });
     },

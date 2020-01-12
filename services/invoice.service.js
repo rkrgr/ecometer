@@ -10,9 +10,9 @@ module.exports = {
             resolve(invoice)
         }) 
     },
-    getInvoices: (num) => {
+    getInvoices: (companyId) => {
         return new Promise(async (resolve, reject) => {
-            const invoices = await invoiceModel.getInvoices(num)
+            const invoices = await invoiceModel.getInvoices(companyId)
             if (invoices === undefined) {
                 reject('Could not access invoice list')
             }
