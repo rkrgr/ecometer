@@ -4,6 +4,21 @@ const db = require('../connection')
 
 const tableName = 'tbl_massnahme'
 
+function rowToMeasure(row) {
+    return {
+        id: row.massnahme_ID,
+        name: row.massnahme_name,
+        date: row.massnahme_datum,
+        public: row.massnahme_offentlich,
+        emissionFactor: row.massnahme_emissionsfaktor,
+        absoluteSaving: row.massnahme_absoluteeinsaprung,
+        co2Saving: row.massnahme_co2einsparung,
+        unit: row.einheit_name,
+        category: row.kategorie_name,
+        company: row.unternehmen_name
+    };
+}
+
 module.exports = {
     getMeasure: (id) => {
         return new Promise((resolve, reject) => {
@@ -18,17 +33,15 @@ module.exports = {
     },
     getLatestMeasures: (num) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' ORDER BY massnahme_datum DESC LIMIT ?', num, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ', tbl_einheit, tbl_kategorie, tbl_unternehmen ' +
+                'WHERE fk_mass_einheit=einheit_ID AND fk_mass_kategorie=kategorie_ID AND fk_mass_unternehmen=unternehmen_ID ' +
+                'ORDER BY massnahme_datum DESC LIMIT ?', num, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
                     let results = []
                     rows.forEach((row) => {
-                        results.push({
-                            name: row.massnahme_name,
-                            timestamp: row.massnahme_datum,
-                            companyId: row.fk_mass_unternehmen
-                        })
+                        results.push(rowToMeasure(row))
                     })
                     resolve(results)
                 }
@@ -37,18 +50,15 @@ module.exports = {
     },
     getBestMeasures: (num) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' ORDER BY massnahme_co2einsparung DESC LIMIT ?', num, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ', tbl_einheit, tbl_kategorie, tbl_unternehmen ' +
+                'WHERE fk_mass_einheit=einheit_ID AND fk_mass_kategorie=kategorie_ID AND fk_mass_unternehmen=unternehmen_ID ' +
+                ' ORDER BY massnahme_co2einsparung DESC LIMIT ?', num, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
                     let results = []
                     rows.forEach((row) => {
-                        results.push({
-                            name: row.massnahme_name,
-                            timestamp: row.massnahme_datum,
-                            companyId: row.fk_mass_unternehmen,
-                            co2Einsparung: row.massnahme_co2einsparung
-                        })
+                        results.push(rowToMeasure(row))
                     })
                     resolve(results)
                 }
