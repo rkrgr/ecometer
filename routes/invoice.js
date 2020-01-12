@@ -8,6 +8,6 @@ router.get('/', invoiceController.invoices);
 router.get('/insert', invoiceController.invoice_insert_index);
 router.post('/insert', invoiceController.invoice_insert);
 
-router.delete('/invoicedelete', invoiceController.invoice_delete);
+router.post('/delete/:invoiceId', invoiceController.invoiceDelete);
 
 module.exports = router;
