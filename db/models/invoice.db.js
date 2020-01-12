@@ -53,6 +53,17 @@ module.exports = {
             })
         })
     },
+    getInvoicesOrderedByEnddateAsc: () => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM tbl_rechnung ORDER BY rechnung_enddatum', (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    },
     getInvoiceFromCompanyOfCategoryBeforeDate: (companyId, categoryId, date) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum < ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
