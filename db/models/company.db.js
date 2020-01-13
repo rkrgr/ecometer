@@ -38,10 +38,23 @@ module.exports = {
             })
         })
     },
-    addCompany: (name, password) => {
+    getCompanyByEMail: (email) => {
         return new Promise((resolve, reject) => {
-            db.query('INSERT INTO ' + tableName + ' (unternehmen_name, unternehmen_passwort) VALUES (?,?);',
-                [name, password],
+            db.query('SELECT * FROM ' + tableName + ' WHERE unternehmen_mail=?', email, (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else if (!rows.length) {
+                    resolve(null)
+                } else {
+                    resolve(rowToCompany(rows[0]))
+                }
+            })
+        })
+    },
+    addCompany: (name, mail, password) => {
+        return new Promise((resolve, reject) => {
+            db.query('INSERT INTO ' + tableName + ' (unternehmen_name, unternehmen_mail, unternehmen_passwort) VALUES (?,?,?);',
+                [name, mail, password],
                 (err, result) => {
                     if (err) {
                         reject(err)
@@ -50,5 +63,18 @@ module.exports = {
                     }
                 })
         })
+    },
+    updatePassword: (id, newPassword) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET unternehmen_passwort=? WHERE unternehmen_ID=?',
+            [newPassword, id],
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.affectedRows);
+                }
+            });
+        });
     }
 }

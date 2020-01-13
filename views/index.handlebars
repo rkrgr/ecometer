@@ -1,14 +1,17 @@
-<table class="ticker">
+<div id="historyChartContainer">
+    <canvas id="historyChart" width="600" height="400"></canvas>
+</div>
+<table class="newsTicker">
     <thead>
         <tr>
             <th colspan="2">News-Ticker</th>
         </tr>
     </thead>
     <tbody>
-        {{#each measures}}
+        {{#each latestMeasures}}
         <tr>
             <td>
-                <span>{{formatDateTime this.timestamp}}</span>
+                <span>{{formatDateTime this.date}}</span>
             </td>
             <td rowspan="2">
                 <span>{{this.name}}</span>
@@ -16,9 +19,39 @@
         </tr>
         <tr>
             <td>
-                <span>{{this.companyId}}</span>
+                <span>{{this.company}}</span>
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<table id="bestMeasures">
+    <thead>
+        <tr>
+            <th colspan="2">Beste Maßnahmen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each bestMeasures}}
+        <tr>
+            <td>
+                <span>{{formatDateTime this.date}}</span>
+            </td>
+            <td>
+                <span>{{this.name}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>{{this.company}}</span>
+            </td>
+            <td>
+                <span>{{this.co2Saving}} t CO2 eingespart</span>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<input id="historyMapValues" type="hidden" value="{{historyMap}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="/js/historyChart.js"></script>

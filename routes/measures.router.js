@@ -10,9 +10,6 @@ router.get('/createMeasures', measuresController.createMeasures);
 router.post('/createMeasures', measuresController.measure_insert);
 router.post('/delete/:measureId',measuresController.measureDelete);
 
-
-
-
 module.exports = router;
 
 

@@ -1,4 +1,4 @@
-const measureModel = require('../../../db/models/measure.db')
+const measureModel = require('../../../db/models/measures.db')
 
 const moment = require('moment')
 
