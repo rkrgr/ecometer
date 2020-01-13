@@ -57,5 +57,43 @@ module.exports = {
                 reject(e);
             }
         })
+    },
+
+    updateCompany: (company) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                //neues PW auslesen
+                const newPassword = company.passwordNew;
+                console.log(newPassword);
+               // company.passwordNew.trim()="";
+                //neuen Firmennamen auslesen
+                const newName= company.name;
+
+                //neue Mailadresse auslesen
+                const newMail = company.mail;
+
+                //altes PW ueberprüfen
+                const hashedPassword = bcrypt.hashSync(company.passwordOld);
+                const oldCompany = await companyModel.getCompanyById(company.id);
+
+                //auslesen des PW aud Datenbank
+                const oldHashedPassword = oldCompany.password;
+
+                //vergleichen ob hashedPassword=oldHashedPassword
+                //console.log(hashedPassword,oldHashedPassword)
+                
+                //await companyModel.updateCompanyWithPassword(company.id, company.name, company.mail, bcrypt.hashSync(newPassword));
+                //resolve();
+                if(company.passwordNew == "") {
+                    await companyModel.updateCompanyWithoutPassword(company.id, company.name, company.mail, bcrypt.hashSync(newPassword));
+                } else {
+                    await companyModel.updateCompanyWithPassword(company.id, company.name, company.mail, bcrypt.hashSync(newPassword));
+                }
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        })
+
     }
 };
