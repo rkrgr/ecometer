@@ -65,9 +65,9 @@ module.exports = {
             })
         })
     },
-    getAllMeasures: (num) => {
+    getAllMeasures: (companyId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName  +' WHERE fk_mass_unternehmen = 1 ORDER BY massnahme_datum DESC LIMIT ?', num, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName  +' WHERE fk_mass_unternehmen = 1 ORDER BY massnahme_datum DESC ', companyId, (err, rows) => {
                 if (err) {
                     console.log('SELECT allMeasures funktioniert nicht');
                     reject(err)

@@ -19,9 +19,9 @@ module.exports = {
             resolve(measures)
         })
     },
-    getAllMeasures: (num) => {
+    getAllMeasures: (companyId) => {
         return new Promise(async (resolve, reject) => {
-            const allMeasures = await measureModel.getAllMeasures(num)
+            const allMeasures = await measureModel.getAllMeasures(companyId)
             if (allMeasures === undefined) {
                 reject('Could not read latest measures from database.')
             }

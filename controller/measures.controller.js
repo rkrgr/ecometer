@@ -5,10 +5,12 @@ const moment = require("moment");
 
 module.exports = {
         allMeasures: async (req, res) => {
-                const allMeasures = await measuresService.getAllMeasures(10);
+                const allMeasures = await measuresService.getAllMeasures(req.user.id);
                 res.render('allMeasures', {
-                    allMeasures
+                        user: req.user,
+                        allMeasures
                 });
+                console.log(allMeasures);
         },
     
         createMeasures: async (req, res) => {
