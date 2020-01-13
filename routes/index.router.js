@@ -10,7 +10,6 @@ router.use('/resetPassword', require('./resetPassword.router'))
 
 router.use('/invoices', require('../routes/invoice.js'))
 
-router.use('/measures', require('./allMeasures.router'))
-router.use('/createMeasures', require('./createMeasures.router'))
+router.use('/measures', require('./measures.router'))
 
 module.exports = router
