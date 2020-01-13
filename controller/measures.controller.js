@@ -38,6 +38,12 @@ module.exports = {
             console.log(measure);
             res.redirect('../measures')        
 
+        },
+        measureDelete: async (req, res)=>{
+                await measuresService.deleteMeasure(req.params.measureId);
+                res.redirect('/measures');
+
         }
+        
         
 }

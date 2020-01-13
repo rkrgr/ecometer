@@ -37,7 +37,7 @@ module.exports = {
     },
     getAllMeasures: (num) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' ORDER BY massnahme_datum DESC LIMIT ?', num, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName  +' WHERE fk_mass_unternehmen = 1 ORDER BY massnahme_datum DESC LIMIT ?', num, (err, rows) => {
                 if (err) {
                     console.log('SELECT allMeasures funzt nicht');
                     reject(err)
@@ -45,6 +45,7 @@ module.exports = {
                     let results = []
                     rows.forEach((row) => {
                         results.push({
+                            fk_mass_unternehmen:row.fk_mass_unternehmen,
                             massnahme_name: row.massnahme_name,
                             fk_mass_kategorie: row.fk_mass_kategorie,
                             massnahme_co2einsparung: row.massnahme_co2einsparung,

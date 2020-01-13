@@ -31,5 +31,16 @@ module.exports = {
             }
             
         })
+    },
+    deleteMeasure:(id)=>{
+        return new Promise(async (resolve,reject)=>{
+            try {
+                const deleteMeasure=await measureModel.deleteMeasure(id)
+                resolve(deleteMeasure)
+            }
+            catch(e){
+                reject(e)
+            }
+        })
     }
 };
