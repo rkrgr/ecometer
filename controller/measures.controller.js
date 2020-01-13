@@ -10,7 +10,7 @@ module.exports = {
                         user: req.user,
                         allMeasures
                 });
-                console.log(allMeasures);
+                console.log('allMeasures= ' + allMeasures);
         },
     
         createMeasures: async (req, res) => {
