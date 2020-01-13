@@ -1,7 +1,7 @@
 const moment = require('moment');
 
-const measureModel = require('../../db/models/measure.db');
-const measureService = require('../../services/measure.service');
+const measureModel = require('../../db/models/measures.db');
+const measureService = require('../../services/measures.service');
 
 const latestMeasuresTestData = [
     {
@@ -24,7 +24,7 @@ const latestMeasuresTestData = [
     }
 ];
 
-jest.mock('../../db/models/measure.db')
+jest.mock('../../db/models/measures.db')
 
 describe('get latest measures', () => {
     it('should return what it got from the model', async () => {
