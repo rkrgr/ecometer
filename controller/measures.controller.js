@@ -1,4 +1,8 @@
 const measuresService = require("../services/measures.service");
+const categoryService = require("../services/category.service");
+console.log(categoryService);
+const unitService = require("../services/unit.service");
+
 //const format = require("moment-format");
 const moment = require("moment");
 
@@ -10,17 +14,22 @@ module.exports = {
                         user: req.user,
                         allMeasures
                 });
-                console.log('allMeasures= ' + allMeasures);
+                console.log('allMeasures controller ');
         },
     
         createMeasures: async (req, res) => {
-                res.render('createMeasures');
+                const categories = await categoryService.getCategories();
+                const unitsforCategoryMap = await unitService.getUnitsForCategory();
+                res.render('createMeasures', {
+                        categories,
+                        unitsforCategory: JSON.stringify(Array.from(unitsforCategoryMap.entries()))
+                });
         },
 
         measure_insert:async (req, res)=>{
             var measure = {}
             
-            //fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen  
+            measure.categoryId = req.body.category;
             measure.massnahme_name=req.body.massnahme_name;
             measure.massnahme_datum=req.body.massnahme_datum;
             measure.massnahme_absoluteeinsaprung=parseFloat(req.body.massnahme_absoluteeinsaprung);
