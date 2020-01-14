@@ -1,4 +1,3 @@
-
 function pilargeneral(percent100, aktualpercent) {
     var pilarborderid= document.getElementById("pilar-border-id");
     pilarborderid.querySelectorAll('*').forEach(n => n.remove());
