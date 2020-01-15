@@ -35,7 +35,6 @@ module.exports = {
         invoice.rechnungsdaten_startdatum = req.body.rechnungsdaten_startdatum;
         invoice.rechnung_enddatum = req.body.rechnung_enddatum;
         invoice.fk_rechn_unternehmen = req.user.id;
-        console.log(invoice);
         const insertInvoice = await invoiceService.insertInvoice(invoice);
         res.redirect('/invoices')
     },
