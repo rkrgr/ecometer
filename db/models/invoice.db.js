@@ -50,7 +50,7 @@ module.exports = {
             })
         })
     },
-    getOldestInvoiceFromCompanyOfCategory: (companyId, categoryId) => {
+    getOldestInvoiceFromCompanyOfCategoryForPilar: (companyId, categoryId) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum < ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
                 if (err) {
@@ -61,7 +61,7 @@ module.exports = {
             })
         })
     },
-    getNewestInvoiceFromCompanyOfCategory: (companyId, categoryId) => {
+    getNewestInvoiceFromCompanyOfCategoryForPilar: (companyId, categoryId) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum > ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
                 if (err) {
