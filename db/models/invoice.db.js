@@ -16,32 +16,7 @@ module.exports = {
                 }
             })
         })
-    },
-    /*
-    getInvoices: (num) => {
-        return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    let results = []
-                    rows.forEach((row) => {
-                        results.push({
-                            //name: row.rechnung_name?
-                            verbrauchswert: row.rechnung_verbrauchswert,
-                            emissionfactor: row.rechnung_emissionsfaktor,
-                            startdate: row.rechnungsdaten_startdatum,
-                            enddate: row.rechnung_enddatum
-
-                        })
-                    })
-                    resolve(results)
-                }
-            })
-        })
-    },
-    */
-    
+    },   
     getInvoices: (companyId) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', companyId, (err, rows) => {
@@ -67,6 +42,28 @@ module.exports = {
     getInvoiceFromCompanyOfCategoryBeforeDate: (companyId, categoryId, date) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum < ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows[0])
+                }
+            })
+        })
+    },
+    getOldestInvoiceFromCompanyOfCategory: (companyId, categoryId) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum < ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows[0])
+                }
+            })
+        })
+    },
+    getNewestInvoiceFromCompanyOfCategory: (companyId, categoryId) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum > ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -104,4 +101,27 @@ module.exports = {
 }
 
 
+    /*
+    getInvoices: (num) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM ' + tableName + ' ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    let results = []
+                    rows.forEach((row) => {
+                        results.push({
+                            //name: row.rechnung_name?
+                            verbrauchswert: row.rechnung_verbrauchswert,
+                            emissionfactor: row.rechnung_emissionsfaktor,
+                            startdate: row.rechnungsdaten_startdatum,
+                            enddate: row.rechnung_enddatum
 
+                        })
+                    })
+                    resolve(results)
+                }
+            })
+        })
+    },
+    */
