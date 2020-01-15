@@ -1,4 +1,5 @@
 const invoiceModel = require("../db/models/invoice.db");
+const categoryModel =require("../db/models/category.db")
 
 module.exports = {
     getInvoice: (id) => {
@@ -46,6 +47,29 @@ module.exports = {
                 });
 
                 resolve(result);
+            } catch (e) {
+                reject(e);
+            }
+        })
+    },
+    getPilardata: () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                 
+                const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar();
+                const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar();
+
+                const co2EmissionOldest = invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
+                const co2EmissionNewest = invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
+
+                if (co2EmissionOldest-co2EmissionNewest>0){
+                    co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
+                } 
+                else {
+                    co2SavingPercent = 0;
+                }
+                
+                resolve(co2SavingPercent);
             } catch (e) {
                 reject(e);
             }
