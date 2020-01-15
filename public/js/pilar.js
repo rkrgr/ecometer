@@ -5,6 +5,7 @@ function pilargeneral(percent100, aktualpercent) {
     var hundredpercent = percent100;
     var percent = aktualpercent;
     for (var i = 0; i < hundredpercent ; i++) {
+        colorid = "normal";
         var opacityhere = (50+i)/100;
         if (i < percent){
             if (i%2) {
@@ -27,7 +28,8 @@ function pilargeneral(percent100, aktualpercent) {
                     color = "#FFFF00"
                 }
                 else if(i > 60 & i <= 70){
-                    color = "#9ACD32"
+                    color = "#9ACD32";
+                    colorid = "green";
                 }
                 else if(i > 70 & i <= 80){
                     color = "#9ACD32"
@@ -37,17 +39,26 @@ function pilargeneral(percent100, aktualpercent) {
                     color = "#003199"
                 }
                 var divtoadd = document.createElement("div");
-                var div_attribute = divtoadd.setAttribute("class", "pilar-case");
+                var div_attribute = divtoadd.setAttribute("class", "pilar-case "+colorid+"");
                 var div_attribute = divtoadd.setAttribute("style", "background-color: "+color+"; opacity: "+1+";");
                 var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
                 document.getElementById('pilar-border-id').appendChild(divtoadd);
+                //<span class="tooltiptext">Tooltip text</span>
+                /*
+                var spantoadd = document.createElement("span");
+                var span_attribute = spantoadd.setAttribute("class", "tooltiptext");
+                var span_attribute = spantoadd.setAttribute("id", "pilar-case-"+i+"");
+                var span_attribute = spantoadd.createTextNode("This is a span element.");
+                document.getElementById('pilar-case-'+i+'').appendChild(divtoadd);
+                */
+
             }
             else {
                 var divtoadd = document.createElement("div");
-                var div_attribute = divtoadd.setAttribute("class", "pilar-case");
+                var div_attribute = divtoadd.setAttribute("class", "pilar-case-black");
                 var div_attribute = divtoadd.setAttribute("style", "background-color: black; opacity: "+1+";");
                 var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
-                document.getElementById('pilar-border-id').appendChild(divtoadd);
+                document.getElementById('pilar-border-id').appendChild(divtoadd);             
             }
         }
         else {
@@ -63,7 +74,7 @@ function pilargeneral(percent100, aktualpercent) {
             else {
                 opacityhere = 2
                 var divtoadd = document.createElement("div");
-                var div_attribute = divtoadd.setAttribute("class", "pilar-case");
+                var div_attribute = divtoadd.setAttribute("class", "pilar-case-black");
                 var div_attribute = divtoadd.setAttribute("style", "background-color: black;");
                 var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
                 document.getElementById('pilar-border-id').appendChild(divtoadd);
