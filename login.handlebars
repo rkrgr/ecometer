@@ -1,0 +1,30 @@
+<html>
+<head>
+   <link rel="stylesheet" href="eco.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+  <div id="mittig">
+<h1>Login</h1><hr>
+{{#if messages.error}}
+    <div>{{messages.error}}</div>
+{{/if}}
+<form action="/login" method="POST">
+
+    <div>
+        <label for="email">E-Mail&nbsp;&nbsp;&nbsp;</label>
+        <input type="email" id="email" name="email" required>
+    </div><br>
+    <div>
+        <label for="password">Passwort</label>
+        <input type="password" id="password" name="password" required>
+    </div><br>
+    <hr><br>
+    <input type="submit" value="     Anmelden        " >
+</form>
+<form action="/resetPassword" method="GET">
+    <a href="javascript:;" onclick="parentNode.submit();">Passwort vergessen?</a>
+</form>
+</div>
+</body>
+</html>

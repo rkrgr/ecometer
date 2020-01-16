@@ -1,0 +1,60 @@
+<head>
+   <link rel="stylesheet" href="eco.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<div id="gross">
+<table class="invoice">
+    <thead>
+        <tr>
+            <th colspan="5">Rechnungen</th>
+        </tr>
+        <tr>
+            <th>
+                <span>Kategorie</span>
+            </th>
+            <th>
+                <span>Verbrauchswert</span>
+            </th>
+            <th>
+                <span>Emissionsfaktor</span>
+            </th>
+            <th>
+                <span>Start-Datum</span>
+            </th>
+            <th>
+                <span>End-Datum</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each invoice}}
+        <tr>
+            <td>
+                <span>{{this.fk_rechn_kategorie}}</span>
+            </td>
+            <td>
+                <span>{{this.rechnung_verbrauchswert}} {{this.fk_rechn_einheit}}</span>
+            </td>
+            <td>
+                <span>{{this.rechnung_emissionsfaktor}}</span>
+            </td>
+            <td>
+                <span>{{formatDateTime this.rechnungsdaten_startdatum}}</span>
+            </td>
+            <td>
+                <span>{{formatDateTime this.rechnung_enddatum}}</span>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<br/>
+<P><input type="submit" value="Löschen" name="invoicedelete" method="DELETE" action="/invoice/invoiceinsert"></P>
+
+{{#each invoice}}
+<input type="text" name="fk_rechn_unternehmen" size="20" value="{{this.fk_rechn_unternehmen}}">
+<input type="text" name="rechnung_ID" size="20" value="{{this.rechnung_ID}}">
+{{/each}}
+
+</div>

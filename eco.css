@@ -1,0 +1,113 @@
+body {margin: 5%; 
+font-size: 16px;}
+
+
+
+
+
+
+table {
+  border-collapse: separate;
+  border-spacing: 0.2em;
+}
+  
+th,td {
+  padding: 0.2em 0.5em;
+  border-radius: 0.1em;  
+}  
+
+thead th {
+  background-color:  #6699cc;
+  color: white;
+}
+
+td {
+  font-style:italic;
+  text-align: right;
+  box-shadow: inset 1px 3px 5px -3px rgba(0,0,0,0.5);
+}   
+
+td:empty{
+  box-shadow: none;
+}
+
+input{ margin: 5px!important;
+ }
+
+input[type=submit] {
+  background: #6699cc!important;
+	border: solid 5px #6699cc!important;
+	margin: 5px!important;
+	color: #fff!important;
+  font-size: 0.9em; }
+
+input [type=submit]:hover{
+	background: #003098!important;
+	border: solid 5px #003098!important;
+ font-size: 0.9em;
+padding: auto;}
+
+button[type=submit] {
+  background: #6699cc!important;
+border: solid 5px  #6699cc!important;
+	margin: 5px!important;
+	color: #fff!important;
+
+ }
+
+button[type=submit]:hover{
+	background: #003098!important;
+border: solid 5px #003098!important;
+	}
+
+
+#mittig {
+  
+    margin:auto;
+padding:10%;
+    width: 20%;
+text-align: center;
+background-color: #E0ECF8;
+
+}
+
+#gross {
+  
+    margin:auto;
+padding:5%;
+    width: 120%;
+text-align: left;
+background-color: #E0ECF8;
+
+}
+
+#invoices {
+  
+margin:1%;
+padding:2%;
+width: 50%;
+background-color: #E0ECF8;
+ 
+
+}
+
+a {
+  background: #6699cc!important;
+	border: solid 5px #6699cc!important;
+	margin: 5px!important;
+	color: #fff!important;
+	font-size: 16px;}
+
+a:hover{
+	background: #003098!important;
+	border: solid 5px #003098!important;}
+
+hr {
+  background-color:#003098;
+  color:#003098;
+  border:#FF0000;
+  height:0.5%;
+margin:2%;
+
+
+}

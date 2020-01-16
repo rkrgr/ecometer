@@ -1,0 +1,86 @@
+
+<head>
+   <link rel="stylesheet" href="eco.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+
+<div id="gross">
+<input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
+<form method="POST" action="/invoices/insert">
+    <table class="invoiceInsert">
+        <thead>
+            <tr>
+                <th colspan="6">Rechnungen</th>
+            </tr>
+            <tr>
+                <th>
+                    <span>Kategorie</span>
+                </th>
+                <th>
+                    <span>Verbrauchswert</span>
+                </th>
+                <th>
+                    <span>Einheit</span>
+                </th>
+                <th>
+                    <span>Emissionsfaktor</span>
+                </th>
+                <th>
+                    <span>Start-Datum</span>
+                </th>
+                <th>
+                    <span>End-Datum</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select id="category" name="category" onchange="resetUnitSelect()">
+                        {{#each categories}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="rechnung_verbrauchswert" size="20" value="200">
+                </td>
+                <td>
+                    <select id="unit" name="unit">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="rechnung_emissionsfaktor" size="20" value="1">
+                </td>
+                <td>
+                    <input type="text" name="rechnungsdaten_startdatum" size="20" value="2013-11-21">
+                </td>
+                <td>
+                    <input type="text" name="rechnung_enddatum" size="20" value="2011-01-12">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <P><input type="submit" value="Senden" name="invoice"></P>
+</form>
+</div>
+<script>
+    let categorySelect = document.getElementById("category");
+    let unitSelect = document.getElementById("unit");
+    let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
+
+    function resetUnitSelect() {
+        unitSelect.options.length = 0;
+        let units = unitsForCategory.get(parseInt(categorySelect.value));
+        for(i = 0; i < units.length; i++) {
+            let unit = units[i];
+            let opt = document.createElement("option");
+            opt.value = unit.id;
+            opt.innerHTML = unit.name;
+            unitSelect.appendChild(opt);
+        }
+    }
+
+    resetUnitSelect();
+</script>
