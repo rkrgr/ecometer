@@ -52,18 +52,19 @@ module.exports = {
     },
     getOldestInvoiceFromCompanyOfCategoryForPilar: (companyId, categoryId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum < ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId], (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve(rows[0])
+                    resolve(rows[0]);
+                    console.log(rows[0]);
                 }
             })
         })
     },
     getNewestInvoiceFromCompanyOfCategoryForPilar: (companyId, categoryId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? AND rechnung_enddatum > ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId, date], (err, rows) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? ORDER BY rechnung_enddatum ASC LIMIT 1', [companyId, categoryId], (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {

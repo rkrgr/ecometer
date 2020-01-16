@@ -57,14 +57,20 @@ module.exports = {
             try {
                 
                 var pilarData = {}
-                const categories = await categoryModel.getCategories();                
-
+                const categories = await categoryModel.getCategories(); 
+                console.log(categories);               
+                //ATENTION 
+                companyId = 1;
+                //ATENTION END
                 categories.forEach(async category => {
+                    // if categroy undefined // null reject -> esle resolve
                     const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
                     const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
-
-                    const co2EmissionOldest = invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
-                    const co2EmissionNewest = invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
+                    //console.log(invoiceNewest);
+                    //console.log("_______________");
+                    //console.log(invoiceOldest)
+                    const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
+                    const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
 
                     if (co2EmissionOldest-co2EmissionNewest>0){
                         co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
