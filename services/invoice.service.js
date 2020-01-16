@@ -1,6 +1,6 @@
 const invoiceModel = require("../db/models/invoice.db");
-const categoryModel =require("../db/models/category.db")
-const companyModel = require("../")
+const categoryModel =require("../db/models/category.db");
+const companyModel = require("../db/models/company.db");
 
 module.exports = {
     getInvoice: (id) => {
@@ -54,14 +54,26 @@ module.exports = {
         })
     },
     getPilarDataOfAllCompanys: () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                var pilarDataCompanys = {};
+                const companies = await companyModel.getListOfAllCompanys();
+                companies.forEach(async company => {
+                    const companyDataPilar = await this.getPilardataByCompanyId(company.id);
+                    pilarDataCompanys.company.id = companyDataPilar;
+                })
 
-
+                resolve(pilarDataCompanys)
+            } catch(e) {
+                reject(e)
+            }
+        })
     },
     getPilardataByCompanyId: (companyId) => {
         return new Promise(async (resolve, reject) => {
             try {
                 
-                var pilarData = {}
+                var pilarDataById = {};
                 const categories = await categoryModel.getCategories(); 
                 console.log(categories);               
                 //ATENTION 
@@ -88,11 +100,11 @@ module.exports = {
                             co2SavingPercent = 0; //überlegen ob man hier einfach 0 draus macht
                         }
 
-                        pilarData.category.id = co2SavingPercent;
+                        pilarDataById.category.id = co2SavingPercent;
                         }
                     }
                 )
-                resolve(pilarData);
+                resolve(pilarDataById);
             } catch (e) {
                 reject(e);
             }
