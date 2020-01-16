@@ -25,6 +25,17 @@ module.exports = {
             })
         })
     },
+    getListOfAllCompanys: () => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM '+tableName+' ORDER BY unternehmen_ID DESC', (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    },
     getCompanyByName: (name) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM ' + tableName + ' WHERE unternehmen_name=?', name, (err, rows) => {

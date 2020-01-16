@@ -1,5 +1,6 @@
 const invoiceModel = require("../db/models/invoice.db");
 const categoryModel =require("../db/models/category.db")
+const companyModel = require("../")
 
 module.exports = {
     getInvoice: (id) => {
@@ -52,7 +53,11 @@ module.exports = {
             }
         })
     },
-    getPilardata: (companyId) => {
+    getPilarDataOfAllCompanys: () => {
+
+
+    },
+    getPilardataByCompanyId: (companyId) => {
         return new Promise(async (resolve, reject) => {
             try {
                 
@@ -63,28 +68,30 @@ module.exports = {
                 companyId = 1;
                 //ATENTION END
                 categories.forEach(async category => {
-                    // if categroy undefined // null reject -> esle resolve
-                    //  -> if category leer -> scip
-                    const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
-                    const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
-                        //console.log(invoiceNewest);
-                        //console.log("_______________");
-                        //console.log(invoiceOldest)
-                    
-                    const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
-                    const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
+                    if (typeof category === 'undefined'){
+                        continue;
 
-                    if (co2EmissionOldest-co2EmissionNewest>0){
-                        co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
-                    } 
-                    else {
-                        co2SavingPercent = 0; //überlegen ob man hier einfach 0 draus macht
+                    }else{
+                        const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
+                        const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
+//                            //console.log(invoiceNewest);
+//                            //console.log("_______________");
+//                            //console.log(invoiceOldest)
+                        
+                        const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
+                        const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
+
+                        if (co2EmissionOldest-co2EmissionNewest>0){
+                            co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
+                        } 
+                        else {
+                            co2SavingPercent = 0; //überlegen ob man hier einfach 0 draus macht
+                        }
+
+                        pilarData.category.id = co2SavingPercent;
+                        }
                     }
-
-                    pilarData.category.id = co2SavingPercent;
-                    });              
-                
-                
+                )
                 resolve(pilarData);
             } catch (e) {
                 reject(e);
