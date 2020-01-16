@@ -56,13 +56,15 @@ module.exports = {
     getPilarDataOfAllCompanys: () => {
         return new Promise(async (resolve, reject) => {
             try {
-                var pilarDataCompanys = {};
+                let pilarDataCompanys = {};
                 const companies = await companyModel.getListOfAllCompanys();
                 companies.forEach(async company => {
-                    const companyDataPilar = await this.getPilardataByCompanyId(company.unternehmen_ID);
-                    pilarDataCompanys.company.unternehmen_ID = companyDataPilar;
+                    const companyDataPilar = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
+                    console.log(companyDataPilar);
+                    //pilarDataCompanys.company.unternehmen_ID = companyDataPilar;
                 })
-                //console.log(pilarDataCompanys); /////////
+                console.log(pilarDataCompanys); /////////
+                pilarDataCompanys=0;
                 resolve(pilarDataCompanys)
             } catch(e) {
                 reject(e)
@@ -72,13 +74,10 @@ module.exports = {
     getPilardataByCompanyId: (companyId) => {
         return new Promise(async (resolve, reject) => {
             try {
-                
+                companyId = 1;
                 var pilarDataById = {};
                 const categories = await categoryModel.getCategories(); 
-                //console.log(categories);               
-                //ATENTION 
-                companyId = 1;
-                //ATENTION END
+                co2SavingPercent = 0;
                 categories.forEach(async category => {
                     const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
                     const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
@@ -89,17 +88,17 @@ module.exports = {
                         const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
                         if (co2EmissionOldest-co2EmissionNewest>0){
                             co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
-                            //console.log(co2SavingPercent);
                         } 
                         else {
                             co2SavingPercent = 0; //überlegen ob man hier einfach 0 draus macht
                         }
                     }               
-
-                    pilarDataById.category.kategorie_ID = co2SavingPercent;
-                    
+                    if (co2SavingPercent === undefined){
+                        console.log(co2SavingPercent);
+                    }else{
+                        pilarDataById.category.id = co2SavingPercent;
+                    }
                 })
-                //console.log(pilarDataById);
                 resolve(pilarDataById);
             } catch (e) {
                 reject(e);
