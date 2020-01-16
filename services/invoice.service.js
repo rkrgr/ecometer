@@ -59,10 +59,10 @@ module.exports = {
                 var pilarDataCompanys = {};
                 const companies = await companyModel.getListOfAllCompanys();
                 companies.forEach(async company => {
-                    const companyDataPilar = await this.getPilardataByCompanyId(company.id);
-                    pilarDataCompanys.company.id = companyDataPilar;
+                    const companyDataPilar = await this.getPilardataByCompanyId(company.unternehmen_ID);
+                    pilarDataCompanys.company.unternehmen_ID = companyDataPilar;
                 })
-
+                //console.log(pilarDataCompanys); /////////
                 resolve(pilarDataCompanys)
             } catch(e) {
                 reject(e)
@@ -75,35 +75,31 @@ module.exports = {
                 
                 var pilarDataById = {};
                 const categories = await categoryModel.getCategories(); 
-                console.log(categories);               
+                //console.log(categories);               
                 //ATENTION 
                 companyId = 1;
                 //ATENTION END
                 categories.forEach(async category => {
-                    if (typeof category === 'undefined'){
-                        continue;
-
-                    }else{
-                        const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
-                        const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
-//                            //console.log(invoiceNewest);
-//                            //console.log("_______________");
-//                            //console.log(invoiceOldest)
-                        
+                    const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
+                    const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
+                    if (invoiceNewest === undefined || invoiceOldest === undefined){
+                        // in case undefined information is needed in future
+                    } else{
                         const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
                         const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
-
                         if (co2EmissionOldest-co2EmissionNewest>0){
                             co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
+                            //console.log(co2SavingPercent);
                         } 
                         else {
                             co2SavingPercent = 0; //überlegen ob man hier einfach 0 draus macht
                         }
+                    }               
 
-                        pilarDataById.category.id = co2SavingPercent;
-                        }
-                    }
-                )
+                    pilarDataById.category.kategorie_ID = co2SavingPercent;
+                    
+                })
+                //console.log(pilarDataById);
                 resolve(pilarDataById);
             } catch (e) {
                 reject(e);

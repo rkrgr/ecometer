@@ -57,7 +57,7 @@ module.exports = {
                     reject(err)
                 } else {
                     resolve(rows[0]);
-                    console.log(rows[0]);
+                    //console.log(rows[0]);
                 }
             })
         })
@@ -75,7 +75,7 @@ module.exports = {
     },
     //format('YYYY-MM-DD') did not work on dates
     insertInvoice: (invoice) => {
-        console.log("db angesprochen");
+        //console.log("db angesprochen");
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (rechnung_verbrauchswert, rechnung_emissionsfaktor, rechnungsdaten_startdatum, rechnung_enddatum, fk_rechn_einheit, fk_rechn_unternehmen, fk_rechn_kategorie) VALUES (?,?,?,?,?,?,?)',
                 [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum, invoice.rechnung_enddatum, invoice.unitId, invoice.fk_rechn_unternehmen, invoice.categoryId], (err, result) => {
@@ -83,7 +83,7 @@ module.exports = {
                         reject(err)
                     } else {
                         resolve(result.insertId)
-                        console.log("inserted into db")
+                        //console.log("inserted into db")
                     }
                 })
         })
