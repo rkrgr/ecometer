@@ -8,7 +8,7 @@ const tableName = 'tbl_rechnung'
 module.exports = {
     getInvoice: (id) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID= ?', id, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID=?', id, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -85,6 +85,19 @@ module.exports = {
                         reject(err)
                     } else {
                         resolve(result.insertId)
+                    }
+                })
+        })
+    },
+    updateInvoice: (invoice) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET rechnung_verbrauchswert=?, rechnung_emissionsfaktor=?, rechnungsdaten_startdatum=?, rechnung_enddatum=?, fk_rechn_einheit=?, fk_rechn_kategorie=? ' +
+                        'WHERE rechnung_ID=?',
+                [invoice.consumption, invoice.emissionFactor, invoice.startDate, invoice.endDate, invoice.unitId, invoice.categoryId, invoice.id], (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result.affectedRows)
                     }
                 })
         })

@@ -40,6 +40,9 @@
                 <span>{{formatDateTime this.rechnung_enddatum}}</span>
             </td>
             <td>
+                <a href="/invoices/{{this.rechnung_ID}}">Ändern</a>
+            </td>
+            <td>
                 <form action="/invoices/delete/{{this.rechnung_ID}}" method="POST">
                     <a href="javascript:;" onclick="if(confirm('Möchten Sie diesen Eintrag wirklich löschen?')){parentNode.submit();}">X</a>
                 </form>
