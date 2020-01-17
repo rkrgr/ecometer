@@ -1,6 +1,8 @@
 //const historyMap = new Map(JSON.parse(document.getElementById("historyMapValues").value).sort());
-const pilarData = document.getElementById("pilarDataId");
-console.log(pilarData);
+const pilarDataId = document.getElementById("pilarDataByCompany");
+const pilarDataAllCompanies = document.getElementById("pilarDataListOfAllCompanys");
+console.log(pilarDataId);
+console.log(pilarDataAllCompanies);
 
 function pilargeneral(percent100, aktualpercent) {
     var pilarborderid= document.getElementById("pilar-border-id");
