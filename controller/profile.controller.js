@@ -4,7 +4,7 @@ module.exports = {
     profile: async(req, res) => {
         const userid = req.user.id;
         const company = await companyService.getCompanyById(userid);
-        res.render('profile', {company}
+        res.render('profile', {company, user: req.user} 
         )
     },
 
