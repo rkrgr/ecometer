@@ -10,18 +10,21 @@ const pilarDataAllCompanies = document.getElementById("pilarDataListOfAllCompany
 //console.log(pilarDataAllCompanies);
 //console.log("halle");
 
-function pilargeneral(percent100, aktualpercent) {
+function pilargeneral(percent100, aktualpercent = pilarone.key1) {
     console.log("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
     i =1;
-    console.log(JSpilarDataId.key2);
-    console.log(pilarDataId.value);
+    //console.log(JSpilarDataId.key2);
+    //console.log(pilarDataId.value);
+    console.log(JSON.parse(pilarDataId.value));
+    var pilarone = JSON.parse(pilarDataId.value);
+    console.log(pilarone.key1);
     //console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
     //console.log(pilarDataAllCompanies);
     //console.log("halle");
     var pilarborderid= document.getElementById("pilar-border-id");
     pilarborderid.querySelectorAll('*').forEach(n => n.remove());
     var hundredpercent = percent100;
-    var percent = aktualpercent;
+    var percent = parse.aktualpercent;
     for (var i = 0; i < hundredpercent ; i++) {
         colorid = "normal";
         var opacityhere = (50+i)/100;
