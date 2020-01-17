@@ -11,7 +11,7 @@
                 <td>Abs. Einsparung</td>
                 <td>Einheit</td>
                 <td>CO&sup2; Einsparung</td>
-                <td>Einheit</td>
+                
             </tr>
             <tr>
                 
@@ -23,28 +23,23 @@
                         {{/each}}
                     </select>
                 <td>
-                    <input type="text" name="massnahme_datum" size="20" value="2013-11-21">
+                    <input type="date" name="massnahme_datum" id="massnahme_datum" value ="2020-01-01" >
                 </td>
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
                 
                 <td> <select id="frei" name ="fk_mass_einheit">
-                        <option value="none" selected="true">-</option>
-                        <option value="warm">kWh</option>
-                        <option value="frisch">m^3</option>
-                        <option value="abwasser">t</option>
+                    {{#each unitsforCategory}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                        
                     </select></td>
                 <td><input name="massnahme_co2einsparung" type="text" size="15"value ="50"></td>
-                <td> <select id="frei"name ="fk_mass_einheit">
-                        <option value="none"selected="true">-</option>
-                        <option value="warm">kWh</option>
-                        <option value="frisch">m^3</option>
-                        <option value="abwasser">t</option>
-                    </select></td>
+                
             </tr>
         </table>
 <h4>Soll Ihre Ma&szlig;nahme &ouml;ffentlich in den Newsticker geladen werden?</h4>
-        <input type="Checkbox" id="frei1"
+        <input type="checkbox" id="frei1" name ="massnahme_offentlich"
             onclick="document.getElementById('frei').disabled = (this.form.news.checked == false);">
         <input type="text" id="frei" disabled value="Ma&szlig;nahme freigegeben">
         <br>
@@ -69,6 +64,8 @@
             unitSelect.appendChild(opt);
         }
     }
+    let now_date=new Date();
+    document.getElementById("massnahme_datum").value=now_date;
 
     resetUnitSelect();
 </script>

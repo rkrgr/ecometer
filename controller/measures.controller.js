@@ -9,7 +9,7 @@ const moment = require("moment");
 
 module.exports = {
         allMeasures: async (req, res) => {
-                const allMeasures = await measuresService.getAllMeasures(req.user.id);
+                const allMeasures = await measuresService.getAllMeasures(10); //req.user.id
                 res.render('allMeasures', {
                         user: req.user,
                         allMeasures
@@ -22,20 +22,23 @@ module.exports = {
                 const unitsforCategoryMap = await unitService.getUnitsForCategory();
                 res.render('createMeasures', {
                         categories,
-                        unitsforCategory: JSON.stringify(Array.from(unitsforCategoryMap.entries()))
+                        unitsforCategory:unitsforCategoryMap //JSON.stringify(Array.from(unitsforCategoryMap.entries()))
                 });
         },
 
         measure_insert:async (req, res)=>{
             var measure = {}
             
-            measure.categoryId = req.body.category;
+            measure.fk_mass_kategorie = req.body.category;
             measure.massnahme_name=req.body.massnahme_name;
             measure.massnahme_datum=req.body.massnahme_datum;
             measure.massnahme_absoluteeinsaprung=parseFloat(req.body.massnahme_absoluteeinsaprung);
             measure.massnahme_co2einsparung=parseFloat(req.body.massnahme_co2einsparung);
-            measure.tbl_kategorie_einheit=1;
+            measure.fk_mass_einheit=req.body.fk_mass_einheit;
             measure.fk_mass_unternehmen=1;
+            measure.massnahme_offentlich=req.body.massnahme_offentlich?true:false;       
+                
+                
 
             console.log(measure);
 
