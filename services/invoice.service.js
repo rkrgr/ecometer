@@ -60,11 +60,11 @@ module.exports = {
                 const companies = await companyModel.getListOfAllCompanys();
                 companies.forEach(async company => {
                     const companyDataPilar = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
-                    console.log(companyDataPilar);
+                    //console.log(companyDataPilar);
                     companyId = company.unternehmen_ID
                     pilarDataCompanys.companyId = companyDataPilar;
                 })
-                console.log(pilarDataCompanys); /////////
+                ///console.log(pilarDataCompanys); /////////
                 pilarDataCompanys=0;
                 resolve(pilarDataCompanys)
             } catch(e) {
@@ -75,12 +75,11 @@ module.exports = {
     getPilardataByCompanyId: (companyId) => {
         return new Promise(async (resolve, reject) => {
             try {
-                companyId = 1;
+                companyId = 1; ///////////////attantion
                 var pilarDataById = {};
                 const categories = await categoryModel.getCategories(); 
                 co2SavingPercent = 0;
                 categories.forEach(async category => {
-                    console.log("categorie id:"+category.id)
                     const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
                     const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
                     if (invoiceNewest === undefined || invoiceOldest === undefined){
@@ -89,20 +88,17 @@ module.exports = {
                         const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
                         const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
                         if (co2EmissionOldest-co2EmissionNewest>0){
-                            co2SavingPercent = ((co2EmissionOldest-co2EmissionOldest)/co2EmissionOldest)*100;
+                            co2SavingPercent = ((co2EmissionOldest-co2EmissionNewest)/co2EmissionOldest)*100;
                         } 
                         else {
-                            co2SavingPercent = 0; //überlegen ob man hier einfach 0 draus macht
+                            co2SavingPercent = 0; //in case increase to display, change here
                         }
                     }               
-                    if (co2SavingPercent === undefined){
-                        console.log(co2SavingPercent);
-                    }else{
-                        console.log(pilarDataById)
-                        categorieId = category.id
-                        pilarDataById.id = co2SavingPercent;
-                    }
-                })
+                    categorieId = category.id
+                    pilarDataById.categorieId = co2SavingPercent;
+                    console.log("by category: "+pilarDataById.categorieId)
+                });
+                console.log("send objekt: "+JSON.stringify(pilarDataById));
                 resolve(pilarDataById);
             } catch (e) {
                 reject(e);
