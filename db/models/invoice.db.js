@@ -19,12 +19,15 @@ module.exports = {
     },   
     getInvoices: (companyId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', companyId, (err, rows) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(rows)
-                }
+            db.query('SELECT * FROM tbl_rechnung r, tbl_kategorie k, tbl_einheit e ' +
+                     'WHERE r.fk_rechn_kategorie = k.kategorie_ID AND r.fk_rechn_einheit = e.einheit_ID AND fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', 
+                     companyId, 
+                     (err, rows) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(rows)
+                        }
             })
         })
     },
