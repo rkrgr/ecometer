@@ -60,11 +60,9 @@ module.exports = {
                 const companies = await companyModel.getListOfAllCompanys();
                 companies.forEach(async company => {
                     const companyDataPilar = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
-                    //console.log(companyDataPilar);
                     companyId = company.unternehmen_ID
                     pilarDataCompanys.companyId = companyDataPilar;
                 })
-                ///console.log(pilarDataCompanys); /////////
                 pilarDataCompanys=0;
                 resolve(pilarDataCompanys)
             } catch(e) {
@@ -85,7 +83,6 @@ module.exports = {
                 for (category = 1; category <= 7; category++ ){
                     const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
                     const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
-                    //console.log(invoiceOldest);
                     if (invoiceNewest === undefined || invoiceOldest === undefined){
                         // in case undefined information is needed in future
                     } else{
@@ -99,12 +96,9 @@ module.exports = {
                         }
                     }               
                     categorieId = "key"+category.toString();
-                    //console.log(categorieId);
                     pilarDataById[categorieId] = co2SavingPercent;
                     co2SavingPercent =0;
-                    //console.log("by category: "+pilarDataById.categorieId)
                 };
-                //console.log("send objekt: "+JSON.stringify(pilarDataById));
                 resolve(pilarDataById);
             } catch (e) {
                 reject(e);
