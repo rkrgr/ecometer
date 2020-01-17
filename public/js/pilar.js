@@ -1,9 +1,33 @@
+//const historyMap = new Map(JSON.parse(document.getElementById("historyMapValues").value).sort());
+const pilarDataId = document.getElementById("pilarDataByCompany");
+const pilarDataAllCompanies = document.getElementById("pilarDataListOfAllCompanys");
+console.log(JSON.parse(pilarDataId.value));
+var pilarone = JSON.parse(pilarDataId.value);
+console.log(pilarone.key1);
+//const pilarDataId1 = JSON.parse(document.getElementById("historyMapValues").value).sort();
+//console.log(pilarDataId1);
+//console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
+//console.log(pilarDataId.key1)
+//console.log(pilarDataId);
+//console.log(pilarDataAllCompanies);
+//console.log("halle");
 
-function pilargeneral(percent100, aktualpercent) {
+function pilargeneral() {
+    console.log("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
+    i =1;
+    //console.log(JSpilarDataId.key2);
+    //console.log(pilarDataId.value);
+
+    //console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
+    //console.log(pilarDataAllCompanies);
+    //console.log("halle");
     var pilarborderid= document.getElementById("pilar-border-id");
     pilarborderid.querySelectorAll('*').forEach(n => n.remove());
-    var hundredpercent = percent100;
-    var percent = aktualpercent;
+    var hundredpercent = 100;
+    //console.log(aktualpercent)
+    console.log(pilarone.key1)
+    var percent = parseInt(pilarone.key1);
+    console.log(percent);
     for (var i = 0; i < hundredpercent ; i++) {
         colorid = "normal";
         var opacityhere = (50+i)/100;
