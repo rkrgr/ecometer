@@ -77,11 +77,15 @@ module.exports = {
             try {
                 companyId = 1; ///////////////attantion
                 var pilarDataById = {};
-                const categories = await categoryModel.getCategories(); 
                 co2SavingPercent = 0;
-                categories.forEach(async category => {
-                    const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
-                    const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category.id);
+                //const categories = await categoryModel.getCategories(); 
+                //categories.forEach(async category => {
+                    //console.log(category);
+                    //console.log(category.id);
+                for (category = 1; category <= 7; category++ ){
+                    const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
+                    const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
+                    //console.log(invoiceOldest);
                     if (invoiceNewest === undefined || invoiceOldest === undefined){
                         // in case undefined information is needed in future
                     } else{
@@ -94,11 +98,13 @@ module.exports = {
                             co2SavingPercent = 0; //in case increase to display, change here
                         }
                     }               
-                    categorieId = category.id
-                    pilarDataById.categorieId = co2SavingPercent;
-                    console.log("by category: "+pilarDataById.categorieId)
-                });
-                console.log("send objekt: "+JSON.stringify(pilarDataById));
+                    categorieId = category;
+                    //console.log(categorieId);
+                    pilarDataById[categorieId] = co2SavingPercent;
+                    co2SavingPercent =0;
+                    //console.log("by category: "+pilarDataById.categorieId)
+                };
+                //console.log("send objekt: "+JSON.stringify(pilarDataById));
                 resolve(pilarDataById);
             } catch (e) {
                 reject(e);
