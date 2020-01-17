@@ -12,4 +12,6 @@ router.use('/invoices', require('../routes/invoice.js'))
 
 router.use('/profile', require('./profile.router'))
 
+router.use('/measures', require('./measures.router'))
+
 module.exports = router
