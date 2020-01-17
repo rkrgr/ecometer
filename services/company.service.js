@@ -64,7 +64,7 @@ module.exports = {
             try {
                 //neues PW auslesen
                 const newPassword = company.passwordNew;
-                console.log(newPassword);
+                //console.log(newPassword);
                // company.passwordNew.trim()="";
                 //neuen Firmennamen auslesen
                 const newName= company.name;
@@ -85,7 +85,7 @@ module.exports = {
                 //await companyModel.updateCompanyWithPassword(company.id, company.name, company.mail, bcrypt.hashSync(newPassword));
                 //resolve();
                 if(company.passwordNew == "") {
-                    await companyModel.updateCompanyWithoutPassword(company.id, company.name, company.mail, bcrypt.hashSync(newPassword));
+                    await companyModel.updateCompanyWithoutPassword(company.id, company.name, company.mail);
                 } else {
                     await companyModel.updateCompanyWithPassword(company.id, company.name, company.mail, bcrypt.hashSync(newPassword));
                 }
