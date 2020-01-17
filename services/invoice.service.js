@@ -22,13 +22,13 @@ module.exports = {
     getHistoryMap: () => {
         return new Promise(async (resolve, reject) => {
             try {
-                let result = new Map();
+                const result = new Map();
                 const invoices = await invoiceModel.getInvoicesOrderedByEnddateAsc();
+
                 invoices.forEach(async invoice => {
                     const companyId = invoice.fk_rechn_unternehmen;
                     const categoryId = invoice.fk_rechn_kategorie;
-                    const date = invoice.rechnung_enddatum;
-                    
+                    const date = invoice.rechnung_enddatum.toJSON();
                     const invoiceBefore = await invoiceModel.getInvoiceFromCompanyOfCategoryBeforeDate(companyId, categoryId, date);
                     
                     if(invoiceBefore) {
@@ -44,6 +44,7 @@ module.exports = {
                         }
                     }
                 });
+
                 resolve(result);
             } catch (e) {
                 reject(e);
