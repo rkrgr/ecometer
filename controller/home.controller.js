@@ -7,7 +7,7 @@ module.exports = {
         const latestMeasures = await measureService.getLatestMeasures(3);
         const bestMeasures = await measureService.getBestMeasures(3);
         const pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId();
-        console.log(pilarDataByCompanyId);
+        //console.log(pilarDataByCompanyId);
         const pilarDataOfAllCompanys = await invoiceService.getPilarDataOfAllCompanys();
 
         res.render('index', {

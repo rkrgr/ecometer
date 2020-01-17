@@ -98,7 +98,7 @@ module.exports = {
                             co2SavingPercent = 0; //in case increase to display, change here
                         }
                     }               
-                    categorieId = category;
+                    categorieId = "key"+category.toString();
                     //console.log(categorieId);
                     pilarDataById[categorieId] = co2SavingPercent;
                     co2SavingPercent =0;

@@ -3,8 +3,14 @@ const pilarDataId = document.getElementById("pilarDataByCompany");
 const pilarDataAllCompanies = document.getElementById("pilarDataListOfAllCompanys");
 console.log(pilarDataId);
 console.log(pilarDataAllCompanies);
+console.log("halle");
 
 function pilargeneral(percent100, aktualpercent) {
+    console.log("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
+    console.log(pilarDataId);
+    //console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
+    console.log(pilarDataAllCompanies);
+    console.log("halle");
     var pilarborderid= document.getElementById("pilar-border-id");
     pilarborderid.querySelectorAll('*').forEach(n => n.remove());
     var hundredpercent = percent100;
