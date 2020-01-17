@@ -1,16 +1,23 @@
 //const historyMap = new Map(JSON.parse(document.getElementById("historyMapValues").value).sort());
 const pilarDataId = document.getElementById("pilarDataByCompany");
 const pilarDataAllCompanies = document.getElementById("pilarDataListOfAllCompanys");
-console.log(pilarDataId);
-console.log(pilarDataAllCompanies);
-console.log("halle");
+
+//const pilarDataId1 = JSON.parse(document.getElementById("historyMapValues").value).sort();
+//console.log(pilarDataId1);
+//console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
+//console.log(pilarDataId.key1)
+//console.log(pilarDataId);
+//console.log(pilarDataAllCompanies);
+//console.log("halle");
 
 function pilargeneral(percent100, aktualpercent) {
     console.log("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
-    console.log(pilarDataId);
+    i =1;
+    console.log(JSpilarDataId.key2);
+    console.log(pilarDataId.value);
     //console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
-    console.log(pilarDataAllCompanies);
-    console.log("halle");
+    //console.log(pilarDataAllCompanies);
+    //console.log("halle");
     var pilarborderid= document.getElementById("pilar-border-id");
     pilarborderid.querySelectorAll('*').forEach(n => n.remove());
     var hundredpercent = percent100;

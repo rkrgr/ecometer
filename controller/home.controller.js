@@ -7,7 +7,7 @@ module.exports = {
         const latestMeasures = await measureService.getLatestMeasures(3);
         const bestMeasures = await measureService.getBestMeasures(3);
         const pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId();
-        //console.log(pilarDataByCompanyId);
+        console.log(pilarDataByCompanyId);
         const pilarDataOfAllCompanys = await invoiceService.getPilarDataOfAllCompanys();
 
         res.render('index', {
@@ -15,7 +15,7 @@ module.exports = {
             historyMap: JSON.stringify(Array.from(historyMap.entries())),
             latestMeasures,
             bestMeasures,
-            pilarDataByCompanyId,
+            pilarDataByCompanyId: JSON.stringify(pilarDataByCompanyId),
             pilarDataOfAllCompanys
         });
     }
