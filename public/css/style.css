@@ -81,14 +81,14 @@ input{ margin: 5px!important;
   }
 
 input[type=submit] {
-  background: #6699cc!important;
-    border: solid 5px #6699cc!important;
+  background: #6699cc; /* removed !important because of tooltip*/
+    border: solid 5px #6699cc; /* removed !important because of tooltip*/
     margin: 5px!important;
     color: #fff!important;
   font-size: 0.9em; }
 
 input [type=submit]:hover{
-    background: #003098!important;
+    background: #003098!important; 
     border: solid 5px #003098!important;
   font-size: 0.9em;
 padding: auto;}
@@ -124,16 +124,16 @@ background-color: #E0ECF8;
 }
 
 a {
-  background: #6699cc!important;
-  border: solid 5px #6699cc!important;
+  background: #6699cc; /* removed !important because of tooltip*/
+  border: solid 5px #6699cc; /* removed !important because of tooltip*/
   margin: 5px;
   color: #fff!important;
   font-size: 16px;
 }
 
 a:hover{
-    background: #003098!important;
-    border: solid 5px #003098!important;}
+    background: #003098; /* removed !important because of tooltip*/
+    border: solid 5px #003098;} /* removed !important because of tooltip*/
 
 hr {
   background-color:#003098;
