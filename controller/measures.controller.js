@@ -44,13 +44,31 @@ module.exports = {
 
             const insertMeasure = await measuresService.insertMeasure(measure);
 
-            //res.render('insertinvoice', {
-            //    insertInvoice
-            //});
-            //res.redirect(307, '/test');
-            //res.send({redirect: '/invoice/invoiceinsert'});
             console.log(measure);
             res.redirect('../measures')        
+        },
+        measureEditIndex: async (req, res) => {
+                const categories = await categoryService.getCategories();
+                const unitsForCategoryMap = await unitService.getUnitsForCategory();
+                const measure = await measuresService.getAllMeasures(req.params.measureId);
+                res.render('measureEdit', {
+                    user: req.user,
+                    measure,
+                    categories,
+                    unitsForCategory: JSON.stringify(Array.from(unitsForCategoryMap.entries()))
+                });
+            },
+        measureUpdate: async (req, res) => {
+        await measuresService.updateMeasure({
+                id: req.body.measureId,
+                massnahme_name: req.body.massnahme_name,
+                massnahme_datum: req.body.massnahme_datum,
+                massnahme_absoluteeinsaprung: req.body.massnahme_absoluteeinsaprung,
+                massnahme_co2einsparung: req.body.massnahme_co2einsparung,
+                unitId: req.body.fk_mass_einheit,
+                categoryId: req.body.category
+        });
+        res.redirect("/measures");
         },
         measureDelete: async (req, res)=>{
                 await measuresService.deleteMeasure(req.params.measureId);

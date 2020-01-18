@@ -1,0 +1,73 @@
+<input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
+<input id="oldUnitId" type="hidden" value="{{measure.fk_mass_einheit}}">
+<h1>Maßnahmen eintragen</h1>
+
+<form action="/measures/edit" method="POST">
+<input type="hidden" name="measureId" value="{{measure.massnahme_ID}}">
+<table>
+            <tr>
+                <td>Ma&szlig;nahmen </td>
+                <td>Kategorie </td>
+                <td>Datum </td>
+                <td>Abs. Einsparung</td>
+                <td>Einheit</td>
+                <td>CO&sup2; Einsparung</td>
+                
+            </tr>
+            <tr>
+                
+                <td><input name="massnahme_name" type="text" size="55" value ={{measure.massnahme_name}}></td>
+                <td>
+                    <select id="category" name="category" onchange="resetUnitSelect()">
+                        {{#each categories}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                <td>
+                    <input type="date" name="massnahme_datum" id="massnahme_datum" value ={{measure.massnahme_datum}} >
+                </td>
+                </td>
+                <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ={{measure.massnahme_absoluteeinsaprung}}></td>
+                
+                <td> <select id="frei" name ="fk_mass_einheit">
+                    {{#each unitsforCategory}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                        
+                    </select></td>
+                <td><input name="massnahme_co2einsparung" type="text" size="15"value ={{measure.massnahme_co2einsparung}}></td>
+                
+            </tr>
+        </table>
+<h4>Soll Ihre Ma&szlig;nahme &ouml;ffentlich in den Newsticker geladen werden?</h4>
+        <input type="checkbox" id="frei1" name ="massnahme_offentlich"
+            onclick="document.getElementById('frei').disabled = (this.form.news.checked == false);">
+        <input type="text" id="frei" disabled value="Ma&szlig;nahme freigegeben">
+        <br>
+
+        <br>
+        <input type="submit" name="measure" id="wpbdp-bar-show-directory-button" value="speichern">
+        <br>
+    </form>
+<script>
+    let categorySelect = document.getElementById("category");
+    let unitSelect = document.getElementById("unit");
+    let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
+
+    function resetUnitSelect() {
+        unitSelect.options.length = 0;
+        let units = unitsForCategory.get(parseInt(categorySelect.value));
+        for(i = 0; i < units.length; i++) {
+            let unit = units[i];
+            let opt = document.createElement("option");
+            opt.value = unit.id;
+            opt.innerHTML = unit.name;
+            unitSelect.appendChild(opt);
+        }
+    }
+    let now_date=new Date();
+    document.getElementById("massnahme_datum").value=now_date;
+
+    resetUnitSelect();
+</script>
+

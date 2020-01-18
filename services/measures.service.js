@@ -40,6 +40,16 @@ module.exports = {
             
         })
     },
+    updateMeasure: (measure) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await measureModel.updateMeasure(measure);
+                resolve()
+            } catch(e) {
+                reject(e)
+            }
+        })
+    },
     deleteMeasure:(id)=>{
         return new Promise(async (resolve,reject)=>{
             try {

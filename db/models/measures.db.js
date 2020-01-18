@@ -94,21 +94,6 @@ module.exports = {
             })
         })
     },
-    /*insertMeasure: (measure) => {
-        return new Promise((resolve, reject) => {
-            console.log("db angesprochen");
-            db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_offentlich) VALUES (?, ?, ?)',
-                [measure.massnahme_name, measure.massnahme_datum.format('YYYY-MM-DD'), true], (err, result) => {
-                    if (err) {
-                        console.log("Fehler beim INSERT");
-                        reject(err)
-                    } else {
-                        resolve(result.insertId)
-                        console.log("Daten an DB schicken");
-                    }
-                })
-        })
-    },*/
     insertMeasure: (measure) => {
         return new Promise((resolve, reject) => {
             console.log("db angesprochen");
@@ -123,6 +108,19 @@ module.exports = {
                     } else {
                         resolve(result.insertId)
                         console.log("Daten an DB schicken");
+                    }
+                })
+        })
+    },
+    updateMeasure: (measure) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET massnahme_name=?, massnahme_datum=?, massnahme_absoluteeinsaprung=?, massnahme_co2einsparung=?, fk_mass_einheit=?, fk_rechn_kategorie=? ' +
+                        'WHERE massnahme_ID=?',
+                [measure.massnahme_name, measure.massnahme_datum, measure.massnahme_absoluteeinsaprung, measure.massnahme_co2einsparung, measure.unitId, measure.categoryId, measure.id], (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result.affectedRows)
                     }
                 })
         })
