@@ -40,7 +40,7 @@
                 <span>{{formatDateTime this.rechnung_enddatum}}</span>
             </td>
             <td>
-                <a href="/invoices/{{this.rechnung_ID}}">Ändern</a>
+                <a href="/invoices/edit/{{this.rechnung_ID}}">Ändern</a>
             </td>
             <td>
                 <form action="/invoices/delete/{{this.rechnung_ID}}" method="POST">

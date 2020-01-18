@@ -4,12 +4,6 @@ const unitService = require("../services/unit.service")
 const moment = require("moment")
 
 module.exports = {
-    invoice: async (req, res) => {
-        const invoice = await invoiceService.getInvoice(1); // hidden field info
-        res.render('invoice', {
-            invoice
-        });
-    },
     invoices: async (req, res) => {
         const invoices = await invoiceService.getInvoices(req.user.id);
         res.render('invoices', {
@@ -21,6 +15,7 @@ module.exports = {
         const categories = await categoryService.getCategories();
         const unitsForCategoryMap = await unitService.getUnitsForCategory();
         res.render('invoiceinsert', {
+            user: req.user,
             categories,
             unitsForCategory: JSON.stringify(Array.from(unitsForCategoryMap.entries()))
         });
