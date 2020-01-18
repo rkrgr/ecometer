@@ -4,7 +4,9 @@ const ctx = document.getElementById('historyChart');
 const historyData = {
     labels: Array.from(historyMap.keys()),
     datasets: [{
-        data: Array.from(historyMap.values())
+        data: Array.from(historyMap.values()),
+        borderColor: '#6699cc',
+        backgroundColor: 'rgba(102, 153, 204, 0.3)'
     }]
 }
 
