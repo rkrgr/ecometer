@@ -28,6 +28,30 @@ body {margin: 5%;
   display: inline;
 }
 
+#homeContainer {
+  padding-top: 50px;
+}
+
+#homeContainer > div {
+  float: left;
+}
+
+#pillarContainer {
+  width: 25%;
+}
+
+#historyChartContainer {
+  width: 45%;
+}
+
+#tickers {
+  width: 30%;
+}
+
+#tickers div {
+  float: right;
+}
+
 table {
   border-collapse: separate;
   border-spacing: 0.2em;
@@ -81,17 +105,6 @@ button[type=submit]:hover{
     background: #003098!important;
 border: solid 5px #003098!important;
     }
-
-
-#mittig {
-  
-    margin:auto;
-padding:10%;
-    width: 20%;
-text-align: center;
-background-color: #E0ECF8;
-
-}
 
 #gross {
 margin:auto;
