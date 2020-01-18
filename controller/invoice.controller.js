@@ -38,6 +38,29 @@ module.exports = {
         const insertInvoice = await invoiceService.insertInvoice(invoice);
         res.redirect('/invoices')
     },
+    invoiceEditIndex: async (req, res) => {
+        const categories = await categoryService.getCategories();
+        const unitsForCategoryMap = await unitService.getUnitsForCategory();
+        const invoice = await invoiceService.getInvoice(req.params.invoiceId);
+        res.render('invoiceEdit', {
+            user: req.user,
+            invoice,
+            categories,
+            unitsForCategory: JSON.stringify(Array.from(unitsForCategoryMap.entries()))
+        });
+    },
+    invoiceUpdate: async (req, res) => {
+        await invoiceService.updateInvoice({
+            id: req.body.invoiceId,
+            consumption: req.body.rechnung_verbrauchswert,
+            emissionFactor: req.body.rechnung_emissionsfaktor,
+            startDate: req.body.rechnungsdaten_startdatum,
+            endDate: req.body.rechnung_enddatum,
+            unitId: req.body.unit,
+            categoryId: req.body.category
+        });
+        res.redirect("/invoices");
+    },
     invoiceDelete: async (req, res) => {
         await invoiceService.deleteInvoice(req.params.invoiceId);
         res.redirect('/invoices');

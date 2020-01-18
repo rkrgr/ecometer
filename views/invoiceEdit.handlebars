@@ -1,6 +1,8 @@
 <input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
-<form method="POST" action="/invoices/insert">
-    <table class="invoiceInsert">
+<input id="oldUnitId" type="hidden" value="{{invoice.fk_rechn_einheit}}">
+<form method="POST" action="/invoices/edit">
+    <input type="hidden" name="invoiceId" value="{{invoice.rechnung_ID}}">
+    <table>
         <thead>
             <tr>
                 <th colspan="6">Rechnungen</th>
@@ -31,35 +33,36 @@
                 <td>
                     <select id="category" name="category" onchange="resetUnitSelect()">
                         {{#each categories}}
-                            <option value="{{this.id}}">{{this.name}}</option>
+                            <option value="{{this.id}}" {{selected this.id ../invoice.fk_rechn_kategorie}}>{{this.name}}</option>
                         {{/each}}
                     </select>
                 </td>
                 <td>
-                    <input type="text" name="rechnung_verbrauchswert" size="20">
+                    <input type="text" name="rechnung_verbrauchswert" value="{{invoice.rechnung_verbrauchswert}}" size="20">
                 </td>
                 <td>
                     <select id="unit" name="unit">
                     </select>
                 </td>                
                 <td>
-                    <input type="text" name="rechnung_emissionsfaktor" size="20">
+                    <input type="text" name="rechnung_emissionsfaktor" value="{{invoice.rechnung_emissionsfaktor}}" size="20">
                 </td>
                 <td>
-                    <input type="text" name="rechnungsdaten_startdatum" size="20">
+                    <input type="text" name="rechnungsdaten_startdatum" value="{{formatDateTime invoice.rechnungsdaten_startdatum}}" size="20">
                 </td>
                 <td>
-                    <input type="text" name="rechnung_enddatum" size="20">
+                    <input type="text" name="rechnung_enddatum" value="{{formatDateTime invoice.rechnung_enddatum}}" size="20">
                 </td>
             </tr>
         </tbody>
     </table>
-    <P><input type="submit" value="Senden" name="invoice"></P>
+    <p><button type="submit">Speichern</button></p>
 </form>
 <script>
-    let categorySelect = document.getElementById("category");
-    let unitSelect = document.getElementById("unit");
-    let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
+    const categorySelect = document.getElementById("category");
+    const unitSelect = document.getElementById("unit");
+    const unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
+    const oldUnitId = document.getElementById("oldUnitId").value;
 
     function resetUnitSelect() {
         unitSelect.options.length = 0;
@@ -69,6 +72,9 @@
             let opt = document.createElement("option");
             opt.value = unit.id;
             opt.innerHTML = unit.name;
+            if(unit.id == oldUnitId) {
+                opt.selected = "selected";
+            }
             unitSelect.appendChild(opt);
         }
     }

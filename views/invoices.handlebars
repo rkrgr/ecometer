@@ -25,10 +25,10 @@
         {{#each invoices}}
         <tr>
             <td>
-                <span>{{this.fk_rechn_kategorie}}</span>
+                <span>{{this.kategorie_name}}</span>
             </td>
             <td>
-                <span>{{this.rechnung_verbrauchswert}} {{this.fk_rechn_einheit}}</span>
+                <span>{{this.rechnung_verbrauchswert}} {{this.einheit_name}}</span>
             </td>
             <td>
                 <span>{{this.rechnung_emissionsfaktor}}</span>
@@ -38,6 +38,9 @@
             </td>
             <td>
                 <span>{{formatDateTime this.rechnung_enddatum}}</span>
+            </td>
+            <td>
+                <a href="/invoices/{{this.rechnung_ID}}">Ändern</a>
             </td>
             <td>
                 <form action="/invoices/delete/{{this.rechnung_ID}}" method="POST">

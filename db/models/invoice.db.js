@@ -8,7 +8,7 @@ const tableName = 'tbl_rechnung'
 module.exports = {
     getInvoice: (id) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID= ?', id, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID=?', id, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -19,12 +19,15 @@ module.exports = {
     },   
     getInvoices: (companyId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', companyId, (err, rows) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(rows)
-                }
+            db.query('SELECT * FROM tbl_rechnung r, tbl_kategorie k, tbl_einheit e ' +
+                     'WHERE r.fk_rechn_kategorie = k.kategorie_ID AND r.fk_rechn_einheit = e.einheit_ID AND fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', 
+                     companyId, 
+                     (err, rows) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(rows)
+                        }
             })
         })
     },
@@ -82,6 +85,19 @@ module.exports = {
                         reject(err)
                     } else {
                         resolve(result.insertId)
+                    }
+                })
+        })
+    },
+    updateInvoice: (invoice) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET rechnung_verbrauchswert=?, rechnung_emissionsfaktor=?, rechnungsdaten_startdatum=?, rechnung_enddatum=?, fk_rechn_einheit=?, fk_rechn_kategorie=? ' +
+                        'WHERE rechnung_ID=?',
+                [invoice.consumption, invoice.emissionFactor, invoice.startDate, invoice.endDate, invoice.unitId, invoice.categoryId, invoice.id], (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result.affectedRows)
                     }
                 })
         })
