@@ -29,8 +29,8 @@ module.exports = {
         invoice.rechnung_verbrauchswert = req.body.rechnung_verbrauchswert;
         invoice.unitId = req.body.unit;
         invoice.rechnung_emissionsfaktor = req.body.rechnung_emissionsfaktor;
-        invoice.rechnungsdaten_startdatum = moment(req.body.rechnungsdaten_startdatum, dateformat);
-        invoice.rechnung_enddatum = moment(req.body.rechnung_enddatum, dateformat);
+        invoice.rechnungsdaten_startdatum = moment(req.body.rechnungsdaten_startdatum);
+        invoice.rechnung_enddatum = moment(req.body.rechnung_enddatum);
         invoice.fk_rechn_unternehmen = req.user.id;
         await invoiceService.insertInvoice(invoice);
         res.redirect('/invoices')
@@ -39,6 +39,8 @@ module.exports = {
         const categories = await categoryService.getCategories();
         const unitsForCategoryMap = await unitService.getUnitsForCategory();
         const invoice = await invoiceService.getInvoice(req.params.invoiceId);
+        invoice.rechnungsdaten_startdatum = moment(invoice.rechnungsdaten_startdatum).format('YYYY-MM-DD');
+        invoice.rechnung_enddatum = moment(invoice.rechnung_enddatum).format('YYYY-MM-DD');
         res.render('invoiceEdit', {
             user: req.user,
             invoice,
@@ -51,8 +53,8 @@ module.exports = {
             id: req.body.invoiceId,
             consumption: req.body.rechnung_verbrauchswert,
             emissionFactor: req.body.rechnung_emissionsfaktor,
-            startDate: moment(req.body.rechnungsdaten_startdatum, dateformat),
-            endDate: moment(req.body.rechnung_enddatum, dateformat),
+            startDate: moment(req.body.rechnungsdaten_startdatum),
+            endDate: moment(req.body.rechnung_enddatum),
             unitId: req.body.unit,
             categoryId: req.body.category
         });

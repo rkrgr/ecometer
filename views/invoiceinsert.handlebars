@@ -46,15 +46,15 @@
                     <input type="text" name="rechnung_emissionsfaktor" size="20">
                 </td>
                 <td>
-                    <input type="text" id="datepickerStart" name="rechnungsdaten_startdatum" size="20">
+                    <input type="date" name="rechnungsdaten_startdatum" size="20">
                 </td>
                 <td>
-                    <input type="text" id="datepickerEnd" name="rechnung_enddatum" size="20">
+                    <input type="date" name="rechnung_enddatum" size="20">
                 </td>
             </tr>
         </tbody>
     </table>
-    <P><input type="submit" value="Senden" name="invoice"></P>
+    <p><input type="submit" value="Senden" name="invoice"></p>
 </form>
 <script>
     let categorySelect = document.getElementById("category");
@@ -74,9 +74,4 @@
     }
 
     resetUnitSelect();
-</script>
-<script src="/js/datepicker.js"></script>
-<script>
-    createDatepicker('datepickerStart');
-    createDatepicker('datepickerEnd');
 </script>
