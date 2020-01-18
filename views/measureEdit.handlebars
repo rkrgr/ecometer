@@ -20,7 +20,7 @@
                 <td>
                     <select id="category" name="category" onchange="resetUnitSelect()">
                         {{#each categories}}
-                            <option value="{{this.id}}">{{this.name}}</option>
+                            <option value="{{this.id}}" {{selected this.id ../measure.fk_mass_kategorie}}>{{this.name}}</option>
                         {{/each}}
                     </select>
                 <td>
