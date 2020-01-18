@@ -1,3 +1,4 @@
+<div id="gross">
 <input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
 <form method="POST" action="/invoices/insert">
     <table class="invoiceInsert">
@@ -41,7 +42,7 @@
                 <td>
                     <select id="unit" name="unit">
                     </select>
-                </td>                
+                </td>
                 <td>
                     <input type="text" name="rechnung_emissionsfaktor" size="20">
                 </td>
@@ -54,8 +55,9 @@
             </tr>
         </tbody>
     </table>
-    <p><input type="submit" value="Senden" name="invoice"></p>
+    <p><input type="submit" value="Erstellen" name="invoice"></p>
 </form>
+</div>
 <script>
     let categorySelect = document.getElementById("category");
     let unitSelect = document.getElementById("unit");
