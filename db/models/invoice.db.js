@@ -1,6 +1,5 @@
 
-//const format = require("moment-format")
-
+const moment = require('moment')
 const db = require('../connection')
 
 const tableName = 'tbl_rechnung'
@@ -76,11 +75,10 @@ module.exports = {
             })
         })
     },
-    //format('YYYY-MM-DD') did not work on dates
     insertInvoice: (invoice) => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (rechnung_verbrauchswert, rechnung_emissionsfaktor, rechnungsdaten_startdatum, rechnung_enddatum, fk_rechn_einheit, fk_rechn_unternehmen, fk_rechn_kategorie) VALUES (?,?,?,?,?,?,?)',
-                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum, invoice.rechnung_enddatum, invoice.unitId, invoice.fk_rechn_unternehmen, invoice.categoryId], (err, result) => {
+                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum.format('YYYY-MM-DD'), invoice.rechnung_enddatum.format('YYYY-MM-DD'), invoice.unitId, invoice.fk_rechn_unternehmen, invoice.categoryId], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {
@@ -93,7 +91,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query('UPDATE ' + tableName + ' SET rechnung_verbrauchswert=?, rechnung_emissionsfaktor=?, rechnungsdaten_startdatum=?, rechnung_enddatum=?, fk_rechn_einheit=?, fk_rechn_kategorie=? ' +
                         'WHERE rechnung_ID=?',
-                [invoice.consumption, invoice.emissionFactor, invoice.startDate, invoice.endDate, invoice.unitId, invoice.categoryId, invoice.id], (err, result) => {
+                [invoice.consumption, invoice.emissionFactor, invoice.startDate.format('YYYY-MM-DD'), invoice.endDate.format('YYYY-MM-DD'), invoice.unitId, invoice.categoryId, invoice.id], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {

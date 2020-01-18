@@ -3,6 +3,8 @@ const categoryService = require("../services/category.service")
 const unitService = require("../services/unit.service")
 const moment = require("moment")
 
+const dateformat = "DD.MM.YYYY";
+
 module.exports = {
     invoices: async (req, res) => {
         const invoices = await invoiceService.getInvoices(req.user.id);
@@ -27,10 +29,10 @@ module.exports = {
         invoice.rechnung_verbrauchswert = req.body.rechnung_verbrauchswert;
         invoice.unitId = req.body.unit;
         invoice.rechnung_emissionsfaktor = req.body.rechnung_emissionsfaktor;
-        invoice.rechnungsdaten_startdatum = req.body.rechnungsdaten_startdatum;
-        invoice.rechnung_enddatum = req.body.rechnung_enddatum;
+        invoice.rechnungsdaten_startdatum = moment(req.body.rechnungsdaten_startdatum, dateformat);
+        invoice.rechnung_enddatum = moment(req.body.rechnung_enddatum, dateformat);
         invoice.fk_rechn_unternehmen = req.user.id;
-        const insertInvoice = await invoiceService.insertInvoice(invoice);
+        await invoiceService.insertInvoice(invoice);
         res.redirect('/invoices')
     },
     invoiceEditIndex: async (req, res) => {
@@ -49,8 +51,8 @@ module.exports = {
             id: req.body.invoiceId,
             consumption: req.body.rechnung_verbrauchswert,
             emissionFactor: req.body.rechnung_emissionsfaktor,
-            startDate: req.body.rechnungsdaten_startdatum,
-            endDate: req.body.rechnung_enddatum,
+            startDate: moment(req.body.rechnungsdaten_startdatum, dateformat),
+            endDate: moment(req.body.rechnung_enddatum, dateformat),
             unitId: req.body.unit,
             categoryId: req.body.category
         });
