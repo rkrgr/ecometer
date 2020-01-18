@@ -114,7 +114,7 @@ module.exports = {
     },
     updateMeasure: (measure) => {
         return new Promise((resolve, reject) => {
-            db.query('UPDATE ' + tableName + ' SET massnahme_name=?, massnahme_datum=?, massnahme_absoluteeinsaprung=?, massnahme_co2einsparung=?, fk_mass_einheit=?, fk_rechn_kategorie=? ' +
+            db.query('UPDATE ' + tableName + ' SET massnahme_name=?, massnahme_datum=?, massnahme_absoluteeinsaprung=?, massnahme_co2einsparung=?, fk_mass_einheit=?, fk_mass_kategorie=? ' +
                         'WHERE massnahme_ID=?',
                 [measure.massnahme_name, measure.massnahme_datum, measure.massnahme_absoluteeinsaprung, measure.massnahme_co2einsparung, measure.unitId, measure.categoryId, measure.id], (err, result) => {
                     if (err) {

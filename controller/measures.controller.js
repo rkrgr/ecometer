@@ -22,7 +22,7 @@ module.exports = {
                 const unitsforCategoryMap = await unitService.getUnitsForCategory();
                 res.render('createMeasures', {
                         categories,
-                        unitsforCategory:unitsforCategoryMap //JSON.stringify(Array.from(unitsforCategoryMap.entries()))
+                        unitsforCategory:JSON.stringify(Array.from(unitsforCategoryMap.entries())) //JSON.stringify(Array.from(unitsforCategoryMap.entries()))
                 });
         },
 
@@ -50,7 +50,8 @@ module.exports = {
         measureEditIndex: async (req, res) => {
                 const categories = await categoryService.getCategories();
                 const unitsForCategoryMap = await unitService.getUnitsForCategory();
-                const measure = await measuresService.getAllMeasures(req.params.measureId);
+                const measure = await measuresService.getMeasure(req.params.measureId);
+                console.log('measureEdit: ' + measure);
                 res.render('measureEdit', {
                     user: req.user,
                     measure,
