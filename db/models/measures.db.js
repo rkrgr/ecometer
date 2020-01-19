@@ -72,7 +72,7 @@ module.exports = {
             ORDER BY massnahme_datum DESC`;
             db.query(query, companyId, (err, rows) => {
                 if (err) {
-                    console.log('SELECT allMeasures funktioniert nicht');
+                   
                     reject(err)
                 } else {
                     let results = []
@@ -88,7 +88,7 @@ module.exports = {
 
                         })
                     })
-                    console.log('getallMeasures von db angefordert');
+                   
                     resolve(results)
                 }
             })
@@ -110,19 +110,17 @@ module.exports = {
         })
     },*/
     insertMeasure: (measure) => {
-        return new Promise((resolve, reject) => {
-            console.log("db angesprochen");
-           
+        return new Promise((resolve, reject) => {          
             db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_absoluteeinsaprung, massnahme_co2einsparung, fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen, massnahme_offentlich  ) VALUES (?,?,?,?,?,?,?,?)',
                 [measure.massnahme_name, measure.massnahme_datum , measure.massnahme_absoluteeinsaprung,  //measure.massnahme_datum.format('YYYY-MM-DD')
                 measure.massnahme_co2einsparung,measure.fk_mass_einheit,measure.fk_mass_kategorie,measure.fk_mass_unternehmen,measure.massnahme_offentlich], (err, result) => {
-                    if (err) {                         
-                        console.log("!!Fehler beim INSERT");
+                    if (err) {                        
+                       
                         console.log(err);
                         reject(err)
                     } else {
                         resolve(result.insertId)
-                        console.log("Daten an DB schicken");
+                        
                     }
                 })
         })

@@ -25,7 +25,7 @@ module.exports = {
             if (allMeasures === undefined) {
                 reject('Could not read latest measures from database.')
             }
-            console.log(allMeasures);
+            
             resolve(allMeasures)
         })
     },

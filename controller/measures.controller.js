@@ -14,7 +14,7 @@ module.exports = {
                         user: req.user,
                         allMeasures
                 });
-                console.log('allMeasures controller ');
+                
         },
     
         createMeasures: async (req, res) => {
@@ -40,7 +40,7 @@ module.exports = {
                 
                 
 
-            console.log(measure);
+           
 
             const insertMeasure = await measuresService.insertMeasure(measure);
 
@@ -49,7 +49,7 @@ module.exports = {
             //});
             //res.redirect(307, '/test');
             //res.send({redirect: '/invoice/invoiceinsert'});
-            console.log(measure);
+        
             res.redirect('../measures')        
         },
         measureDelete: async (req, res)=>{
