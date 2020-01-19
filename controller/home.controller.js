@@ -6,16 +6,21 @@ module.exports = {
         const historyMap = await invoiceService.getHistoryMap();
         const latestMeasures = await measureService.getLatestMeasures(3);
         const bestMeasures = await measureService.getBestMeasures(3);
-        const pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId(1); // req.body.id is empty
+        let pilarDataByCompanyId = undefined;
+        if (req.user === undefined) {
+            // in case undefined information is needed in future
+            pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId(1);
+        }else{
+            pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId(req.user.id);
+        }
         const pilarDataOfAllCompanys = await invoiceService.getPilarDataOfAllCompanys();
-        console.log(pilarDataOfAllCompanys);
         res.render('index', {
             user: req.user,
             historyMap: JSON.stringify(Array.from(historyMap.entries())),
             latestMeasures,
             bestMeasures,
             pilarDataByCompanyId: JSON.stringify(pilarDataByCompanyId),
-            pilarDataOfAllCompanys: JSON.stringify(pilarDataByCompanyId)
+            pilarDataOfAllCompanys: JSON.stringify(pilarDataByCompanyId) // pilarDataOfAllCompanys empty
         });
     }
 }
