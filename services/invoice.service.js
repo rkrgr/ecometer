@@ -56,14 +56,40 @@ module.exports = {
     getPilarDataOfAllCompanys: () => {
         return new Promise(async (resolve, reject) => {
             try {
-                let pilarDataCompanys = {};
+                var pilarDataCompanys = {};
                 const companies = await companyModel.getListOfAllCompanys();
                 companies.forEach(async company => {
-                    const companyDataPilar = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
-                    companyId = company.unternehmen_ID
-                    pilarDataCompanys.companyId = companyDataPilar;
+                    const pilarDataCompany = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
+
+                    //pilarDataCompany.forEach(async category => {
+                    //    pilarDataCompanys[category.key] = category.value
+                    //})
+                    console.log("*********")
+                    for(var key in pilarDataCompany) {
+                        categorieId = key.toString();
+                        console.log(categorieId);
+                        pilarDataCompanys[categorieId] = pilarDataCompany[key];
+                        date = pilarDataCompany[key];
+                        console.log(date);
+                        pilarDataCompanys[categorieId] =date;
+                        console.log("--------------------")
+                        //console.log(pilarDataCompany[key]);
+                      }
+                    //console.log("pilarDataCompany")
+                    //console.log(pilarDataCompany);
+                    //console.log("----------------");
+                    //console.log("pilarDataCompanys")
+                    //console.log(pilarDataCompanys);
+                    //companyId = "company"+company.unternehmen_ID.toString();
+                    //let parsehere =JSON.parse(pilarDataCompany);
+                    //console.log(parsehere);
+                    //pilarDataCompanys.companyId = parsehere;
+                    //pilarDataCompanys.put(companyId,parsehere);
                 })
-                pilarDataCompanys=0;
+                console.log("pilarDataCompanys")
+                console.log("pilarDataCompanys");
+                console.log(pilarDataCompanys);
+                //pilarDataCompanys=0;
                 resolve(pilarDataCompanys)
             } catch(e) {
                 reject(e)
@@ -73,9 +99,8 @@ module.exports = {
     getPilardataByCompanyId: (companyId) => {
         return new Promise(async (resolve, reject) => {
             try {
-                companyId = 1; ///////////////attantion
                 var pilarDataById = {};
-                co2SavingPercent = 0;
+                //co2SavingPercent = 0;
                 //const categories = await categoryModel.getCategories(); 
                 //categories.forEach(async category => {
                     //console.log(category);
@@ -97,7 +122,7 @@ module.exports = {
                     }               
                     categorieId = "key"+category.toString();
                     pilarDataById[categorieId] = co2SavingPercent;
-                    co2SavingPercent =0;
+                    co2SavingPercent = 0;
                 };
                 resolve(pilarDataById);
             } catch (e) {

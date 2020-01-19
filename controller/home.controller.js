@@ -6,16 +6,16 @@ module.exports = {
         const historyMap = await invoiceService.getHistoryMap();
         const latestMeasures = await measureService.getLatestMeasures(3);
         const bestMeasures = await measureService.getBestMeasures(3);
-        const pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId();
+        const pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId(1); // req.body.id is empty
         const pilarDataOfAllCompanys = await invoiceService.getPilarDataOfAllCompanys();
-
+        console.log(pilarDataOfAllCompanys);
         res.render('index', {
             user: req.user,
             historyMap: JSON.stringify(Array.from(historyMap.entries())),
             latestMeasures,
             bestMeasures,
             pilarDataByCompanyId: JSON.stringify(pilarDataByCompanyId),
-            pilarDataOfAllCompanys
+            pilarDataOfAllCompanys: JSON.stringify(pilarDataByCompanyId)
         });
     }
 }
