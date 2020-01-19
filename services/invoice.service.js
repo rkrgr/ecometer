@@ -27,7 +27,8 @@ module.exports = {
                 const result = new Map();
                 const invoices = await invoiceModel.getInvoicesOrderedByEnddateAsc();
 
-                invoices.forEach(async invoice => {
+                for(i = 0; i < invoices.length; i++) {
+                    const invoice = invoices[i];
                     const companyId = invoice.fk_rechn_unternehmen;
                     const categoryId = invoice.fk_rechn_kategorie;
                     const date = invoice.rechnung_enddatum.toJSON();
@@ -36,7 +37,11 @@ module.exports = {
                     if(invoiceBefore) {
                         const co2EmissionBefore = invoiceBefore.rechnung_emissionsfaktor * invoiceBefore.rechnung_verbrauchswert;
                         const co2Emission = invoice.rechnung_emissionsfaktor * invoice.rechnung_verbrauchswert;
-                        const co2Saving = co2EmissionBefore - co2Emission;
+                        let co2SavingBefore = result.get(invoiceBefore.rechnung_enddatum.toJSON());
+                        if(co2SavingBefore === undefined) {
+                            co2SavingBefore = 0;
+                        }  
+                        const co2Saving = co2SavingBefore + co2EmissionBefore - co2Emission;
 
                         if(result.has(date)) {
                             let co2SavingSum = result.get(date) + co2Saving;
@@ -45,7 +50,7 @@ module.exports = {
                             result.set(date, co2Saving);
                         }
                     }
-                });
+                }
 
                 resolve(result);
             } catch (e) {
