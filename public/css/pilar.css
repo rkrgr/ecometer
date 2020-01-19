@@ -1,3 +1,4 @@
+/*pilar css*/
 .column {
     float: left;
     width: 33%;
@@ -78,7 +79,7 @@
     margin-bottom: 0%;
     /*box-shadow: 10px 10px 10px 10px #0ff;*/
 }
-
+    /*pilar end */
     /* tool tip css*/
 .pilar-link{
     background: transparent  !important;
@@ -130,6 +131,8 @@ a.tooltip:hover:before {
 a.tooltip:hover:after, a:hover:before {
     opacity: 1;
 }
+
+/*tooltip end*/
 /*
 .pilar-case:hover {
     /*transform: scale(1.5); */ /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
