@@ -82,7 +82,8 @@ module.exports = {
                             kategorie_name: row.kategorie_name,
                             massnahme_co2einsparung: row.massnahme_co2einsparung,
                             massnahme_absoluteeinsaprung: row.massnahme_absoluteeinsaprung,
-                            massnahme_datum: row.massnahme_datum
+                            massnahme_datum: row.massnahme_datum,
+                            einheit_name: row.einheit_name
 
                         })
                     })
