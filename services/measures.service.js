@@ -1,6 +1,16 @@
 const measureModel = require("../db/models/measures.db");
 
 module.exports = {
+    
+    getMeasure: (id) => {
+        return new Promise(async (resolve, reject) => {
+            const measure = await measureModel.getMeasure(id)
+            if (measure === undefined) {
+                reject('Could not read latest measures from database.')
+            }
+            resolve(measure)
+        })
+    },
     getLatestMeasures: (num) => {
         return new Promise(async (resolve, reject) => {
             const latestMeasures = await measureModel.getLatestMeasures(num)
@@ -25,7 +35,6 @@ module.exports = {
             if (allMeasures === undefined) {
                 reject('Could not read latest measures from database.')
             }
-            
             resolve(allMeasures)
         })
     },
@@ -38,6 +47,16 @@ module.exports = {
                 reject(e)
             }
             
+        })
+    },
+    updateMeasure: (measure) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await measureModel.updateMeasure(measure);
+                resolve()
+            } catch(e) {
+                reject(e)
+            }
         })
     },
     deleteMeasure:(id)=>{

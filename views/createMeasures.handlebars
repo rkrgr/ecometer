@@ -14,12 +14,13 @@
                 <th>Abs. Einsparung</th>
                 <th>Einheit</th>
                 <th>CO&sup2; Einsparung</th>
-            </tr></thead>
+            </tr>
+    </thead>
             <tr>
 
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
                 <td>
-                    <select id="category" name="category" onchange="resetUnitSelect()">
+                     <select id="category" name="category" onchange="resetUnitSelect()">
                         {{#each categories}}
                             <option value="{{this.id}}">{{this.name}}</option>
                         {{/each}}
@@ -29,7 +30,6 @@
                 </td>
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
-
                 <td>
                     <select id="unit" name="fk_mass_einheit">
                     </select>
@@ -54,7 +54,6 @@
     let categorySelect = document.getElementById("category");
     let unitSelect = document.getElementById("unit");
     let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
-
     function resetUnitSelect() {
         unitSelect.options.length = 0;
         let units = unitsForCategory.get(parseInt(categorySelect.value));
@@ -66,6 +65,5 @@
             unitSelect.appendChild(opt);
         }
     }
-
     resetUnitSelect();
 </script>

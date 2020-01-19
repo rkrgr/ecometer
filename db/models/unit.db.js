@@ -30,6 +30,7 @@ module.exports = {
                             result.set(categoryId, [unit])
                         }
                     });
+                    console.log('getUnitsForCategory im model angesprochen');
                     resolve(result);
                 }
             });

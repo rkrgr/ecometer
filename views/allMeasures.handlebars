@@ -30,7 +30,7 @@
                 <span>{{this.massnahme_name}}</span>
             </td>
             <td>
-                <span>{{this.kategorie_name}}</span>
+               <span>{{this.kategorie_name}}</span>
             </td>
             <td>
                 <span>{{this.massnahme_co2einsparung}}</span>
@@ -40,6 +40,9 @@
             </td>
             <td>
                 <span>{{formatDateTime this.massnahme_datum}}</span>
+            </td>
+            <td>
+                <a href="/measures/{{this.massnahme_ID}}">Ändern</a>
             </td>
             <td>
                 <form action ="/measures/delete/{{this.massnahme_ID}}" method="POST">
