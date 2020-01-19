@@ -85,7 +85,7 @@ input[type=submit] {
     border: solid 5px #6699cc!important;
     margin: 5px!important;
     color: #fff!important;
-  font-size: 0.9em; }
+ }
 
 input [type=submit]:hover{
     background: #003098!important;
@@ -131,16 +131,20 @@ a {
   font-size: 16px;
 }
 
-a:hover{
-    background: #003098!important;
-    border: solid 5px #003098!important;}
+.button {
+  font-size: 16px;
+  padding: 5px 35px;
+}
+
+a:hover, .button:hover {
+  background: #003098!important;
+  border: solid 5px #003098!important;
+}
 
 hr {
   background-color:#003098;
   color:#003098;
   border:#FF0000;
   height:0.5%;
-margin:2%;
-
-
+  margin:2%;
 }
