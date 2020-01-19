@@ -58,15 +58,20 @@ module.exports = {
             try {
                 var pilarDataCompanys = {};
                 const companies =  await companyModel.getListOfAllCompanys();
-                for (let company in companies) {
+                for(i = 0; i < companies.length; i++) {
+                    let company = companies[i];
                     const pilarDataCompany = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
                     for(var key in pilarDataCompany) {
                         categorieId = key.toString();
+                        if(pilarDataCompanys[categorieId] === undefined) {
+                            pilarDataCompanys[categorieId] = 0;
+                        }
                         pilarDataCompanys[categorieId] += pilarDataCompany[key];
-                        specificKey = pilarDataCompany[key];
-                        pilarDataCompanys[categorieId] = specificKey;
+                        // specificKey = pilarDataCompany[key];
+                        // pilarDataCompanys[categorieId] = specificKey;
                     }
                 }
+                console.log(pilarDataCompanys)
                 resolve(pilarDataCompanys)
             } catch(e) {
                 reject(e)
