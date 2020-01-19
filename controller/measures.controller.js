@@ -52,13 +52,15 @@ module.exports = {
                 const categories = await categoryService.getCategories();
                 const unitsForCategoryMap = await unitService.getUnitsForCategory();
                 const measure = await measuresService.getMeasure(req.params.measureId);
-                console.log('measureEdit: ' + measure);
+                console.log('measureEditIndex gerendert mit: measure.fk_mass_einheit: ' + measure.fk_mass_einheit);
+                console.log('measureEditIndex gerendert mit: measure.fk_mass_kategorie: ' + measure.fk_mass_kategorie);
                 res.render('measureEdit', {
                     user: req.user,
                     measure,
                     categories,
                     unitsForCategory: JSON.stringify(Array.from(unitsForCategoryMap.entries()))
                 });
+                
             },
         measureUpdate: async (req, res) => {
         await measuresService.updateMeasure({
