@@ -1,20 +1,23 @@
 <input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
-<h1>Maßnahmen eintragen</h1>
+
+<div id="gross">
+
+<h1>Maßnahme eintragen</h1>
 
 <form action="/measures/createMeasures" method="POST">
-
 <table>
+  <thead>
             <tr>
-                <td>Ma&szlig;nahme </td>
-                <td>Kategorie </td>
-                <td>Datum </td>
-                <td>Abs. Einsparung</td>
-                <td>Einheit</td>
-                <td>CO&sup2; Einsparung</td>
-                
+                <th>Ma&szlig;nahmename </th>
+                <th>Kategorie</th>
+                <th>Datum </th>
+                <th>Abs. Einsparung</th>
+                <th>Einheit</th>
+                <th>CO&sup2; Einsparung</th>
             </tr>
+    </thead>
             <tr>
-                
+
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
                 <td>
                      <select id="category" name="category" onchange="resetUnitSelect()">
@@ -27,7 +30,6 @@
                 </td>
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
-                
                 <td>
                     <select id="unit" name="fk_mass_einheit">
                     </select>
@@ -65,4 +67,3 @@
     }
     resetUnitSelect();
 </script>
-

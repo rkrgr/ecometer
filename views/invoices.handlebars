@@ -1,4 +1,5 @@
-<table class="invoice">
+<div id="gross">
+<table class="invoice" id="invoices">
     <thead>
         <tr>
             <th colspan="5">Rechnungen</th>
@@ -25,10 +26,10 @@
         {{#each invoices}}
         <tr>
             <td>
-                <span>{{this.fk_rechn_kategorie}}</span>
+                <span>{{this.kategorie_name}}</span>
             </td>
             <td>
-                <span>{{this.rechnung_verbrauchswert}} {{this.fk_rechn_einheit}}</span>
+                <span>{{this.rechnung_verbrauchswert}} {{this.einheit_name}}</span>
             </td>
             <td>
                 <span>{{this.rechnung_emissionsfaktor}}</span>
@@ -40,8 +41,11 @@
                 <span>{{formatDateTime this.rechnung_enddatum}}</span>
             </td>
             <td>
+                <a href="/invoices/edit/{{this.rechnung_ID}}">Ändern</a>
+            </td>
+            <td>
                 <form action="/invoices/delete/{{this.rechnung_ID}}" method="POST">
-                    <a href="javascript:;" onclick="if(confirm('Möchten Sie diesen Eintrag wirklich löschen?')){parentNode.submit();}">X</a>
+                    <a href="javascript:;" onclick="if(confirm('Möchten Sie diesen Eintrag wirklich löschen?')){parentNode.submit();}">Löschen</a>
                 </form>
             </td>
         </tr>
@@ -49,3 +53,4 @@
     </tbody>
 </table>
 <a href="/invoices/insert">Neue Abrechnung hinzufügen</a>
+</div>

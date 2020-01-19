@@ -1,0 +1,171 @@
+body {margin: 5%; 
+  font-family: Tahoma, Geneva, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0px;
+  font-style: normal;
+}
+
+.topnav {
+  overflow: hidden;
+  background: #6699cc;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 5px 11px;
+  margin: 0;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.topnav form {
+  display: inline;
+}
+
+#homeContainer {
+  padding-top: 50px;
+}
+
+#homeContainer > div {
+  float: left;
+}
+
+#pillarContainer {
+  width: 25%;
+}
+
+#historyChartContainer {
+  width: 45%;
+}
+
+#tickers {
+  width: 30%;
+}
+
+#tickers div {
+  float: right;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0.2em;
+}
+  
+th,td {
+  padding: 0.2em 0.5em;
+  border-radius: 0.1em;  
+}  
+
+thead th {
+  background-color:  #6699cc;
+  color: white;
+}
+
+td {
+  font-style: normal;
+  text-align: right;
+  box-shadow: inset 1px 3px 5px -3px rgba(0,0,0,0.5);
+}   
+
+td:empty{
+  box-shadow: none;
+}
+
+input{ margin: 5px!important;
+  }
+
+input[type=submit] {
+  background: #6699cc; /* removed !important because of tooltip*/
+    border: solid 5px #6699cc; /* removed !important because of tooltip*/
+    margin: 5px!important;
+    color: #fff!important;
+ }
+
+input [type=submit]:hover{
+    background: #003098!important; 
+    border: solid 5px #003098!important;
+  font-size: 0.9em;
+padding: auto;}
+
+button[type=submit] {
+  background: #6699cc!important;
+border: solid 5px  #6699cc!important;
+    margin: 5px!important;
+    color: #fff!important;
+
+  }
+
+button[type=submit]:hover{
+    background: #003098!important;
+border: solid 5px #003098!important;
+    }
+
+#gross {
+margin:auto;
+padding:5%;
+width: 120%;
+text-align: left;
+background-color: #E0ECF8;
+
+}
+
+#profilform {
+
+margin:1%;
+padding:2%;
+width: 50%;
+background-color: #E0ECF8;
+
+}
+
+#profilform p {
+  
+  width: 70%;
+  
+  }
+
+#profilform p input {
+  
+  width: 45%;
+  float: right;
+  
+  }
+#invoices {
+  
+margin:1%;
+padding:2%;
+width: 50%;
+background-color: #E0ECF8;
+}
+
+a {
+  background: #6699cc; /* removed !important because of tooltip*/
+  border: solid 5px #6699cc; /* removed !important because of tooltip*/
+  margin: 5px;
+  color: #fff!important;
+  font-size: 16px;
+}
+
+.button {
+  font-size: 16px;
+  padding: 5px 35px;
+}
+
+a:hover, .button:hover {
+  background: #003098;
+  border: solid 5px #003098;
+}
+
+hr {
+  background-color:#003098;
+  color:#003098;
+  border:#FF0000;
+  height:0.5%;
+  margin:2%;
+}

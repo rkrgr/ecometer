@@ -1,6 +1,5 @@
 
-//const format = require("moment-format")
-
+const moment = require('moment')
 const db = require('../connection')
 
 const tableName = 'tbl_rechnung'
@@ -8,7 +7,7 @@ const tableName = 'tbl_rechnung'
 module.exports = {
     getInvoice: (id) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID= ?', id, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' WHERE rechnung_ID=?', id, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -16,40 +15,18 @@ module.exports = {
                 }
             })
         })
-    },
-    /*
-    getInvoices: (num) => {
-        return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM ' + tableName + ' ORDER BY rechnungsdaten_startdatum DESC LIMIT ?', num, (err, rows) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    let results = []
-                    rows.forEach((row) => {
-                        results.push({
-                            //name: row.rechnung_name?
-                            verbrauchswert: row.rechnung_verbrauchswert,
-                            emissionfactor: row.rechnung_emissionsfaktor,
-                            startdate: row.rechnungsdaten_startdatum,
-                            enddate: row.rechnung_enddatum
-
-                        })
-                    })
-                    resolve(results)
-                }
-            })
-        })
-    },
-    */
-    
+    },   
     getInvoices: (companyId) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', companyId, (err, rows) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(rows)
-                }
+            db.query('SELECT * FROM tbl_rechnung r, tbl_kategorie k, tbl_einheit e ' +
+                     'WHERE r.fk_rechn_kategorie = k.kategorie_ID AND r.fk_rechn_einheit = e.einheit_ID AND fk_rechn_unternehmen=? ORDER BY rechnungsdaten_startdatum DESC', 
+                     companyId, 
+                     (err, rows) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(rows)
+                        }
             })
         })
     },
@@ -75,17 +52,50 @@ module.exports = {
             })
         })
     },
-    //format('YYYY-MM-DD') did not work on dates
+    getOldestInvoiceFromCompanyOfCategoryForPilar: (companyId, categoryId) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? ORDER BY rechnung_enddatum ASC LIMIT 1', [companyId, categoryId], (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows[0]);
+                    //console.log(rows[0]);
+                }
+            })
+        })
+    },
+    getNewestInvoiceFromCompanyOfCategoryForPilar: (companyId, categoryId) => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM tbl_rechnung WHERE fk_rechn_unternehmen = ? AND fk_rechn_kategorie = ? ORDER BY rechnung_enddatum DESC LIMIT 1', [companyId, categoryId], (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows[0])
+                }
+            })
+        })
+    },
     insertInvoice: (invoice) => {
-        console.log("db angesprochen");
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO ' + tableName + ' (rechnung_verbrauchswert, rechnung_emissionsfaktor, rechnungsdaten_startdatum, rechnung_enddatum, fk_rechn_einheit, fk_rechn_unternehmen, fk_rechn_kategorie) VALUES (?,?,?,?,?,?,?)',
-                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum, invoice.rechnung_enddatum, invoice.unitId, invoice.fk_rechn_unternehmen, invoice.categoryId], (err, result) => {
+                [invoice.rechnung_verbrauchswert, invoice.rechnung_emissionsfaktor, invoice.rechnungsdaten_startdatum.format('YYYY-MM-DD'), invoice.rechnung_enddatum.format('YYYY-MM-DD'), invoice.unitId, invoice.fk_rechn_unternehmen, invoice.categoryId], (err, result) => {
                     if (err) {
                         reject(err)
                     } else {
                         resolve(result.insertId)
-                        console.log("inserted into db")
+                    }
+                })
+        })
+    },
+    updateInvoice: (invoice) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET rechnung_verbrauchswert=?, rechnung_emissionsfaktor=?, rechnungsdaten_startdatum=?, rechnung_enddatum=?, fk_rechn_einheit=?, fk_rechn_kategorie=? ' +
+                        'WHERE rechnung_ID=?',
+                [invoice.consumption, invoice.emissionFactor, invoice.startDate.format('YYYY-MM-DD'), invoice.endDate.format('YYYY-MM-DD'), invoice.unitId, invoice.categoryId, invoice.id], (err, result) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(result.affectedRows)
                     }
                 })
         })
@@ -102,6 +112,4 @@ module.exports = {
         })
     }
 }
-
-
 

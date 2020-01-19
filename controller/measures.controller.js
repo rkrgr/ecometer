@@ -3,7 +3,6 @@ const categoryService = require("../services/category.service");
 console.log(categoryService);
 const unitService = require("../services/unit.service");
 
-//const format = require("moment-format");
 const moment = require("moment");
 
 
@@ -14,7 +13,6 @@ module.exports = {
                         user: req.user,
                         allMeasures
                 });
-                console.log('allMeasures controller ');
         },
     
         createMeasures: async (req, res) => {
@@ -37,15 +35,10 @@ module.exports = {
             measure.massnahme_co2einsparung=parseFloat(req.body.massnahme_co2einsparung);
             measure.fk_mass_einheit=req.body.fk_mass_einheit;
             measure.fk_mass_unternehmen= req.user.id;
-            measure.massnahme_offentlich=req.body.massnahme_offentlich?true:false;     
-                
-                
-
-            console.log(measure);
-
-            const insertMeasure = await measuresService.insertMeasure(measure);
-
-            console.log(measure);
+            measure.massnahme_offentlich=req.body.massnahme_offentlich?true:false;
+          
+            await measuresService.insertMeasure(measure);
+          
             res.redirect('/measures')        
         },
         measureEditIndex: async (req, res) => {
