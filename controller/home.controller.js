@@ -14,13 +14,14 @@ module.exports = {
             pilarDataByCompanyId = await invoiceService.getPilardataByCompanyId(req.user.id);
         }
         const pilarDataOfAllCompanys = await invoiceService.getPilarDataOfAllCompanys();
+        console.log("controller: "+pilarDataOfAllCompanys.value);
         res.render('index', {
             user: req.user,
             historyMap: JSON.stringify(Array.from(historyMap.entries())),
             latestMeasures,
             bestMeasures,
             pilarDataByCompanyId: JSON.stringify(pilarDataByCompanyId),
-            pilarDataOfAllCompanys: JSON.stringify(pilarDataByCompanyId) // pilarDataOfAllCompanys empty
+            pilarDataOfAllCompanys: JSON.stringify(pilarDataOfAllCompanys) // pilarDataOfAllCompanys empty
         });
     }
 }

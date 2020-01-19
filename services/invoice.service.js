@@ -56,7 +56,8 @@ module.exports = {
     getPilarDataOfAllCompanys: () => {
         return new Promise(async (resolve, reject) => {
             try {
-                var pilarDataCompanys = {}; //object allways empty
+                const pilarDataCompanys = new Map();
+                //var pilarDataCompanys = {}; //object allways empty
                 const companies = await companyModel.getListOfAllCompanys();
                 companies.forEach(async company => {
                     const pilarDataCompany = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
@@ -66,6 +67,7 @@ module.exports = {
                         specificKey = pilarDataCompany[key];
                         pilarDataCompanys[categorieId] = specificKey;
                       }
+                console.log("getPilarDataOfAllCompanys")
                 console.log(pilarDataCompanys) //object is empty
                 })
                 resolve(pilarDataCompanys)
