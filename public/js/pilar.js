@@ -67,6 +67,13 @@ function pilargeneral() {
                 var div_attribute = divtoadd.setAttribute("style", "background-color: "+color+"; opacity: "+1+";");
                 var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
                 document.getElementById('pilar-border-id').appendChild(divtoadd);
+                
+                var linktoadd = document.createElement("a");
+                var link_attribute = linktoadd.setAttribute("class", "pilar-link tooltip");
+                //var link_attribute = linktoadd.innerText = "link text";
+                var link_attribute = linktoadd.setAttribute( "data-tooltip", "Einsparungen: "+percent+"%");
+                var link_attribute = linktoadd.setAttribute("id", "pilar-case-"+i+"");
+                document.getElementById("pilar-case-"+i+"").appendChild(linktoadd);
                 //<span class="tooltiptext">Tooltip text</span>
                 /*
                 var spantoadd = document.createElement("span");
