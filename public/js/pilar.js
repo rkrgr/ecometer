@@ -1,9 +1,12 @@
 //const historyMap = new Map(JSON.parse(document.getElementById("historyMapValues").value).sort());
 const pilarDataId = document.getElementById("pilarDataByCompany");
 const pilarDataAllCompanies = document.getElementById("pilarDataListOfAllCompanys");
-console.log(JSON.parse(pilarDataId.value));
+//console.log(JSON.parse(pilarDataId.value));
+console.log(JSON.parse(pilarDataAllCompanies.value));
 var pilarone = JSON.parse(pilarDataId.value);
-console.log(pilarone.key1);
+var pilarAll = JSON.parse(pilarDataAllCompanies.value);
+console.log(pilarAll.key1);
+//console.log(pilarone.key1);
 //const pilarDataId1 = JSON.parse(document.getElementById("historyMapValues").value).sort();
 //console.log(pilarDataId1);
 //console.log(JSON.parse(document.getElementById("pilarDataByCompany")));
@@ -43,7 +46,7 @@ function pilargeneral() {
     console.log(percent);
     var percent = parseInt(percent);
     console.log(percent);
-    for (var i = 0; i < hundredpercent ; i++) {
+    for (var i = 0; i <= hundredpercent ; i++) {
         colorid = "normal";
         var opacityhere = (50+i)/100;
         if (i < percent){
@@ -106,6 +109,12 @@ function pilargeneral() {
                 var div_attribute = divtoadd.setAttribute("style", "background-color: #747474; opacity: "+opacityhere+";"); // 747474
                 var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
                 document.getElementById('pilar-border-id').appendChild(divtoadd);
+
+                var linktoadd = document.createElement("a");
+                var link_attribute = linktoadd.setAttribute("class", "pilar-link tooltip");
+                var link_attribute = linktoadd.setAttribute( "data-tooltip", ""+tooltip_text+""+percent+"%");
+                var link_attribute = linktoadd.setAttribute("id", "pilar-case-"+i+"");
+                document.getElementById("pilar-case-"+i+"").appendChild(linktoadd);
                 
             }
             else {

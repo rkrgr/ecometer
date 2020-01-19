@@ -4,21 +4,25 @@
     width: 33%;
     padding: 30px;
 }
-#bar {
-    background-color: #6699cc;
-    width: 200px;
-    height: 600px;
-    margin: 0 auto;
-}
 
 #yearText {
     text-align: center;
     font-size: 25px;
+
+
 }
 
 .year {
-    text-align: center;
-    width: 100%;
+    font-size: 25px;
+    
+    margin-top: 50px;
+    padding: 0%;
+    height:300px;
+    width: 200px;
+    position: relative;
+    float:left;
+
+
 }
 .pilar-wrapper {
     margin: 0%;
