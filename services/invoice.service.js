@@ -56,14 +56,22 @@ module.exports = {
     getPilarDataOfAllCompanys: () => {
         return new Promise(async (resolve, reject) => {
             try {
-                let pilarDataCompanys = {};
-                const companies = await companyModel.getListOfAllCompanys();
-                companies.forEach(async company => {
-                    const companyDataPilar = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
-                    companyId = company.unternehmen_ID
-                    pilarDataCompanys.companyId = companyDataPilar;
-                })
-                pilarDataCompanys=0;
+                var pilarDataCompanys = {};
+                const companies =  await companyModel.getListOfAllCompanys();
+                for(i = 0; i < companies.length; i++) {
+                    let company = companies[i];
+                    const pilarDataCompany = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
+                    for(var key in pilarDataCompany) {
+                        categorieId = key.toString();
+                        if(pilarDataCompanys[categorieId] === undefined) {
+                            pilarDataCompanys[categorieId] = 0;
+                        }
+                        pilarDataCompanys[categorieId] += pilarDataCompany[key];
+                        // specificKey = pilarDataCompany[key];
+                        // pilarDataCompanys[categorieId] = specificKey;
+                    }
+                }
+                console.log(pilarDataCompanys)
                 resolve(pilarDataCompanys)
             } catch(e) {
                 reject(e)
@@ -73,22 +81,19 @@ module.exports = {
     getPilardataByCompanyId: (companyId) => {
         return new Promise(async (resolve, reject) => {
             try {
-                companyId = 1; ///////////////attantion
                 var pilarDataById = {};
-                co2SavingPercent = 0;
-                //const categories = await categoryModel.getCategories(); 
-                //categories.forEach(async category => {
-                    //console.log(category);
-                    //console.log(category.id);
+                var co2SavingPercent = 0;
                 for (category = 1; category <= 7; category++ ){
                     const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
                     const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
+                    
                     if (invoiceNewest === undefined || invoiceOldest === undefined){
                         // in case undefined information is needed in future
                     } else{
-                        const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
-                        const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
-                        if (co2EmissionOldest-co2EmissionNewest>0){
+                        const co2EmissionOldest = invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
+                        const co2EmissionNewest = invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
+
+                        if (co2EmissionOldest - co2EmissionNewest > 0){
                             co2SavingPercent = ((co2EmissionOldest-co2EmissionNewest)/co2EmissionOldest)*100;
                         } 
                         else {
@@ -97,7 +102,7 @@ module.exports = {
                     }               
                     categorieId = "key"+category.toString();
                     pilarDataById[categorieId] = co2SavingPercent;
-                    co2SavingPercent =0;
+                    co2SavingPercent = 0;
                 };
                 resolve(pilarDataById);
             } catch (e) {
