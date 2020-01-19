@@ -13,21 +13,8 @@ module.exports = {
     // returns map with categoryId -> unit
     getUnitsForCategory: () => {
         return new Promise((resolve, reject) => {
-            db.query("SELECT * FROM " + tableName, (err, rows) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    let result = [];
-                    rows.forEach(row => {
-                        result.push(rowToUnit(row));
-                    });
-                    resolve(result);
-                }
-            });
-
-
-            /* db.query("SELECT * FROM " + tableName + ", tbl_kategorie_einheit " +
-            "WHERE einheit_ID=fk_einheit", (err, rows) => {
+            db.query("SELECT * FROM " + tableName + ", tbl_kategorie_einheit " +
+                "WHERE einheit_ID=fk_einheit", (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -45,7 +32,7 @@ module.exports = {
                     });
                     resolve(result);
                 }
-            }); */
+            });
         });
     }
 };

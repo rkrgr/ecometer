@@ -22,7 +22,7 @@ module.exports = {
                 res.render('createMeasures', {
                         user: req.user,
                         categories,
-                        unitsforCategory:unitsforCategoryMap //JSON.stringify(Array.from(unitsforCategoryMap.entries()))
+                        unitsForCategory: JSON.stringify(Array.from(unitsforCategoryMap.entries()))
                 });
         },
 
@@ -37,14 +37,10 @@ module.exports = {
             measure.fk_mass_einheit=req.body.fk_mass_einheit;
             measure.fk_mass_unternehmen= req.user.id;
             measure.massnahme_offentlich=req.body.massnahme_offentlich?true:false;       
-                
-                
-
-           
 
             const insertMeasure = await measuresService.insertMeasure(measure);
 
-            res.redirect('../measures')        
+            res.redirect('/measures')        
         },
         measureDelete: async (req, res)=>{
                 await measuresService.deleteMeasure(req.params.measureId);
