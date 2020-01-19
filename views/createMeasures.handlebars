@@ -1,57 +1,45 @@
+<input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
+
 <div id="gross">
 
-<h1>Maßnahmen eintragen</h1>
+<h1>Maßnahme eintragen</h1>
 
 <form action="/measures/createMeasures" method="POST">
-    <h5>Bitte wählen Sie eine Kategorie aus: </h5>
-        <table>
-
-                <input type="radio" name="Energie" value="energie" checked> Energie<br>
-                <input type="radio" name="Waermeenergie" value="Wärme"> W&auml;rmeenergie<br>
-                <input type="radio" name="Frischwasser" value="Frischwasser"> Frischwasser<br>
-                <input type="radio" name="Abwasser" value="abwasser"> Abwasser<br>
-                <input type="radio" name="Gruenbeflanzung" value="pflanze"> Gr&uuml;nbepflanzung
-
-        </table>
-
-<br>
-
-
 <table>
   <thead>
             <tr>
-                <th>Ma&szlig;nahmen </th>
+                <th>Ma&szlig;nahmename </th>
+                <th>Kategorie</th>
                 <th>Datum </th>
                 <th>Abs. Einsparung</th>
                 <th>Einheit</th>
                 <th>CO&sup2; Einsparung</th>
-                <th>Einheit</th>
             </tr></thead>
             <tr>
 
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
                 <td>
-                    <input type="text" name="massnahme_datum" size="20" value="2013-11-21">
+                    <select id="category" name="category" onchange="resetUnitSelect()">
+                        {{#each categories}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                <td>
+                    <input type="date" name="massnahme_datum" id="massnahme_datum">
+                </td>
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
 
-                <td> <select id="frei" name ="fk_mass_einheit">
-                        <option value="none" selected="true">-</option>
-                        <option value="warm">kWh</option>
-                        <option value="frisch">m^3</option>
-                        <option value="abwasser">t</option>
-                    </select></td>
+                <td>
+                    <select id="unit" name="fk_mass_einheit">
+                    </select>
+                </td>
                 <td><input name="massnahme_co2einsparung" type="text" size="15"value ="50"></td>
-                <td> <select id="frei"name ="fk_mass_einheit">
-                        <option value="none"selected="true">-</option>
-                        <option value="warm">kWh</option>
-                        <option value="frisch">m^3</option>
-                        <option value="abwasser">t</option>
-                    </select></td>
+                
             </tr>
         </table>
 <h4>Soll Ihre Ma&szlig;nahme &ouml;ffentlich in den Newsticker geladen werden?</h4>
-        <input type="Checkbox" id="frei1"
+        <input type="checkbox" id="frei1" name ="massnahme_offentlich"
             onclick="document.getElementById('frei').disabled = (this.form.news.checked == false);">
         <input type="text" id="frei" disabled value="Ma&szlig;nahme freigegeben">
         <br>
@@ -60,5 +48,24 @@
         <input type="submit" name="measure" id="wpbdp-bar-show-directory-button" value="speichern">
         <br>
     </form>
-    </div>
-    
+</div>
+<script>
+    document.getElementById("massnahme_datum").value= new Date().toISOString().substr(0, 10);
+    let categorySelect = document.getElementById("category");
+    let unitSelect = document.getElementById("unit");
+    let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
+
+    function resetUnitSelect() {
+        unitSelect.options.length = 0;
+        let units = unitsForCategory.get(parseInt(categorySelect.value));
+        for(i = 0; i < units.length; i++) {
+            let unit = units[i];
+            let opt = document.createElement("option");
+            opt.value = unit.id;
+            opt.innerHTML = unit.name;
+            unitSelect.appendChild(opt);
+        }
+    }
+
+    resetUnitSelect();
+</script>

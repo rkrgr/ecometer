@@ -14,7 +14,7 @@ module.exports = {
     getUnitsForCategory: () => {
         return new Promise((resolve, reject) => {
             db.query("SELECT * FROM " + tableName + ", tbl_kategorie_einheit " +
-            "WHERE einheit_ID=fk_einheit", (err, rows) => {
+                "WHERE einheit_ID=fk_einheit", (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {

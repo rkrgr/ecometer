@@ -6,9 +6,6 @@
     </tr>
     <tr>
         <th>
-            <span>Unternehmen</span>
-        </th>
-        <th>
             <span>Maßnahme</span>
         </th>
         <th>
@@ -30,13 +27,10 @@
     {{#each allMeasures}}
         <tr>
             <td>
-                <span>{{this.fk_mass_unternehmen}}</span>
-            </td>
-            <td>
                 <span>{{this.massnahme_name}}</span>
             </td>
             <td>
-                <span>{{this.fk_mass_kategorie}}</span>
+                <span>{{this.kategorie_name}}</span>
             </td>
             <td>
                 <span>{{this.massnahme_co2einsparung}}</span>
@@ -48,8 +42,8 @@
                 <span>{{formatDateTime this.massnahme_datum}}</span>
             </td>
             <td>
-                <form action ="/measures/delete/{{this.massnahme_ID}}" method ="POST">
-                <a href ="javascript:;" onclick "if(confirm('Möchten Sie diesen Eintrag wirklich löschen?')){parentNode.submit();}">Delete</a>
+                <form action ="/measures/delete/{{this.massnahme_ID}}" method="POST">
+                <a href ="javascript:;" onclick="if(confirm('Möchten Sie diesen Eintrag wirklich löschen?')){parentNode.submit();}">Delete</a>
                 </form>
             </td>
             
