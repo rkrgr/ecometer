@@ -56,20 +56,17 @@ module.exports = {
     getPilarDataOfAllCompanys: () => {
         return new Promise(async (resolve, reject) => {
             try {
-                const pilarDataCompanys = new Map();
-                //var pilarDataCompanys = {}; //object allways empty
-                const companies = await companyModel.getListOfAllCompanys();
-                companies.forEach(async company => {
+                var pilarDataCompanys = {};
+                const companies =  await companyModel.getListOfAllCompanys();
+                for (let company in companies) {
                     const pilarDataCompany = await module.exports.getPilardataByCompanyId(company.unternehmen_ID);
                     for(var key in pilarDataCompany) {
                         categorieId = key.toString();
                         pilarDataCompanys[categorieId] += pilarDataCompany[key];
                         specificKey = pilarDataCompany[key];
                         pilarDataCompanys[categorieId] = specificKey;
-                      }
-                console.log("getPilarDataOfAllCompanys")
-                console.log(pilarDataCompanys) //object is empty
-                })
+                    }
+                }
                 resolve(pilarDataCompanys)
             } catch(e) {
                 reject(e)
@@ -84,12 +81,14 @@ module.exports = {
                 for (category = 1; category <= 7; category++ ){
                     const invoiceOldest = await invoiceModel.getOldestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
                     const invoiceNewest = await invoiceModel.getNewestInvoiceFromCompanyOfCategoryForPilar(companyId, category); //category.id
+                    
                     if (invoiceNewest === undefined || invoiceOldest === undefined){
                         // in case undefined information is needed in future
                     } else{
-                        const co2EmissionOldest = await invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
-                        const co2EmissionNewest = await invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
-                        if (co2EmissionOldest-co2EmissionNewest>0){
+                        const co2EmissionOldest = invoiceOldest.rechnung_verbrauchswert * invoiceOldest.rechnung_emissionsfaktor;
+                        const co2EmissionNewest = invoiceNewest.rechnung_verbrauchswert * invoiceNewest.rechnung_emissionsfaktor;
+
+                        if (co2EmissionOldest - co2EmissionNewest > 0){
                             co2SavingPercent = ((co2EmissionOldest-co2EmissionNewest)/co2EmissionOldest)*100;
                         } 
                         else {
