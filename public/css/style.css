@@ -115,6 +115,27 @@ background-color: #E0ECF8;
 
 }
 
+#profilform {
+
+margin:1%;
+padding:2%;
+width: 50%;
+background-color: #E0ECF8;
+
+}
+
+#profilform p {
+  
+  width: 70%;
+  
+  }
+
+#profilform p input {
+  
+  width: 45%;
+  float: right;
+  
+  }
 #invoices {
   
 margin:1%;
