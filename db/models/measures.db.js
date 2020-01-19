@@ -67,12 +67,10 @@ module.exports = {
     },
     getAllMeasures: (companyId) => {
         return new Promise((resolve, reject) => {
-            let query = `SELECT ${tableName}.*,tbl_kategorie.kategorie_name FROM ${tableName}
-            left join tbl_kategorie on ${tableName}.fk_mass_kategorie=tbl_kategorie.kategorie_ID
-            ORDER BY massnahme_datum DESC`;
-            db.query(query, companyId, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' m, tbl_kategorie k, tbl_einheit e ' +
+                     'WHERE m.fk_mass_kategorie = k.kategorie_ID AND m.fk_mass_einheit = e.einheit_ID AND m.fk_mass_unternehmen=? ORDER BY m.massnahme_datum DESC', 
+                    companyId, (err, rows) => {
                 if (err) {
-                    console.log('SELECT allMeasures funktioniert nicht');
                     reject(err)
                 } else {
                     let results = []
@@ -88,7 +86,6 @@ module.exports = {
 
                         })
                     })
-                    console.log('getallMeasures von db angefordert');
                     resolve(results)
                 }
             })
@@ -101,13 +98,13 @@ module.exports = {
             db.query('INSERT INTO ' + tableName + ' (massnahme_name, massnahme_datum, massnahme_absoluteeinsaprung, massnahme_co2einsparung, fk_mass_einheit, fk_mass_kategorie, fk_mass_unternehmen, massnahme_offentlich  ) VALUES (?,?,?,?,?,?,?,?)',
                 [measure.massnahme_name, measure.massnahme_datum , measure.massnahme_absoluteeinsaprung,  //measure.massnahme_datum.format('YYYY-MM-DD')
                 measure.massnahme_co2einsparung,measure.fk_mass_einheit,measure.fk_mass_kategorie,measure.fk_mass_unternehmen,measure.massnahme_offentlich], (err, result) => {
-                    if (err) {                         
-                        console.log("!!Fehler beim INSERT");
+                    if (err) {                        
+
                         console.log(err);
                         reject(err)
                     } else {
                         resolve(result.insertId)
-                        console.log("Daten an DB schicken");
+                        
                     }
                 })
         })

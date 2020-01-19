@@ -5,7 +5,7 @@
 
 <table>
             <tr>
-                <td>Ma&szlig;nahmen </td>
+                <td>Ma&szlig;nahme </td>
                 <td>Kategorie </td>
                 <td>Datum </td>
                 <td>Abs. Einsparung</td>
@@ -17,23 +17,21 @@
                 
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
                 <td>
-                    <select id="category" name="category" onchange="resetUnitSelect()">
+                     <select id="category" name="category" onchange="resetUnitSelect()">
                         {{#each categories}}
                             <option value="{{this.id}}">{{this.name}}</option>
                         {{/each}}
                     </select>
                 <td>
-                    <input type="date" name="massnahme_datum" id="massnahme_datum" value ="2020-01-01" >
+                    <input type="date" name="massnahme_datum" id="massnahme_datum">
                 </td>
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
                 
-                <td> <select id="frei" name ="fk_mass_einheit">
-                    {{#each unitsforCategory}}
-                            <option value="{{this.id}}">{{this.name}}</option>
-                        {{/each}}
-                        
-                    </select></td>
+                <td>
+                    <select id="unit" name="fk_mass_einheit">
+                    </select>
+                </td>
                 <td><input name="massnahme_co2einsparung" type="text" size="15"value ="50"></td>
                 
             </tr>
@@ -48,11 +46,12 @@
         <input type="submit" name="measure" id="wpbdp-bar-show-directory-button" value="speichern">
         <br>
     </form>
+</div>
 <script>
+    document.getElementById("massnahme_datum").value= new Date().toISOString().substr(0, 10);
     let categorySelect = document.getElementById("category");
     let unitSelect = document.getElementById("unit");
     let unitsForCategory = new Map(JSON.parse(document.getElementById("unitsForCategoryValues").value));
-
     function resetUnitSelect() {
         unitSelect.options.length = 0;
         let units = unitsForCategory.get(parseInt(categorySelect.value));
@@ -64,9 +63,6 @@
             unitSelect.appendChild(opt);
         }
     }
-    let now_date=new Date();
-    document.getElementById("massnahme_datum").value=now_date;
-
     resetUnitSelect();
 </script>
 

@@ -5,9 +5,6 @@
     </tr>
     <tr>
         <th>
-            <span>Unternehmen</span>
-        </th>
-        <th>
             <span>Maßnahme</span>
         </th>
         <th>
@@ -29,13 +26,10 @@
     {{#each allMeasures}}
         <tr>
             <td>
-                <span>{{this.fk_mass_unternehmen}}</span>
-            </td>
-            <td>
                 <span>{{this.massnahme_name}}</span>
             </td>
             <td>
-                <span>{{this.kategorie_name}}</span>
+               <span>{{this.kategorie_name}}</span>
             </td>
             <td>
                 <span>{{this.massnahme_co2einsparung}}</span>

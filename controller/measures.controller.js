@@ -9,7 +9,7 @@ const moment = require("moment");
 
 module.exports = {
         allMeasures: async (req, res) => {
-                const allMeasures = await measuresService.getAllMeasures(10); //req.user.id
+                const allMeasures = await measuresService.getAllMeasures(req.user.id); 
                 res.render('allMeasures', {
                         user: req.user,
                         allMeasures
@@ -21,8 +21,9 @@ module.exports = {
                 const categories = await categoryService.getCategories();
                 const unitsforCategoryMap = await unitService.getUnitsForCategory();
                 res.render('createMeasures', {
+                        user: req.user,
                         categories,
-                        unitsforCategory:JSON.stringify(Array.from(unitsforCategoryMap.entries())) //JSON.stringify(Array.from(unitsforCategoryMap.entries()))
+                        unitsForCategory: JSON.stringify(Array.from(unitsforCategoryMap.entries()))
                 });
         },
 
@@ -35,8 +36,8 @@ module.exports = {
             measure.massnahme_absoluteeinsaprung=parseFloat(req.body.massnahme_absoluteeinsaprung);
             measure.massnahme_co2einsparung=parseFloat(req.body.massnahme_co2einsparung);
             measure.fk_mass_einheit=req.body.fk_mass_einheit;
-            measure.fk_mass_unternehmen=1;
-            measure.massnahme_offentlich=req.body.massnahme_offentlich?true:false;       
+            measure.fk_mass_unternehmen= req.user.id;
+            measure.massnahme_offentlich=req.body.massnahme_offentlich?true:false;     
                 
                 
 
@@ -45,7 +46,7 @@ module.exports = {
             const insertMeasure = await measuresService.insertMeasure(measure);
 
             console.log(measure);
-            res.redirect('../measures')        
+            res.redirect('/measures')        
         },
         measureEditIndex: async (req, res) => {
                 const categories = await categoryService.getCategories();
