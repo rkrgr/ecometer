@@ -29,12 +29,10 @@
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ={{measure.massnahme_absoluteeinsaprung}}></td>
                 
-                <td> <select id="frei" name ="fk_mass_einheit">
-                    {{#each unitsforCategory}}
-                            <option value="{{this.id}}">{{this.name}}</option>
-                        {{/each}}
-                        
-                    </select></td>
+                <td> 
+                    <select id="unit" name ="fk_mass_einheit">
+                    </select>
+                </td>
                 <td><input name="massnahme_co2einsparung" type="text" size="15"value ={{measure.massnahme_co2einsparung}}></td>
                 
             </tr>

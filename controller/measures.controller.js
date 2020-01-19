@@ -45,6 +45,7 @@ module.exports = {
                 const categories = await categoryService.getCategories();
                 const unitsForCategoryMap = await unitService.getUnitsForCategory();
                 const measure = await measuresService.getMeasure(req.params.measureId);
+                measure.massnahme_datum = moment(measure.massnahme_datum).format('YYYY-MM-DD');
                 console.log('measureEditIndex gerendert mit: measure.fk_mass_einheit: ' + measure.fk_mass_einheit);
                 console.log('measureEditIndex gerendert mit: measure.fk_mass_kategorie: ' + measure.fk_mass_kategorie);
                 res.render('measureEdit', {
