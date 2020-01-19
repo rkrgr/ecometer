@@ -12,9 +12,12 @@ console.log(pilarone.key1);
 //console.log(pilarDataAllCompanies);
 //console.log("halle");
 
+tooltip_text = "Einsparungen: "
+
 function pilargeneral() {
     console.log("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
     i =1;
+    var percent = 0;
     //console.log(JSpilarDataId.key2);
     //console.log(pilarDataId.value);
 
@@ -25,8 +28,20 @@ function pilargeneral() {
     pilarborderid.querySelectorAll('*').forEach(n => n.remove());
     var hundredpercent = 100;
     //console.log(aktualpercent)
-    console.log(pilarone.key1)
-    var percent = parseInt(pilarone.key1);
+    //console.log(pilarone.key1)
+    console.log("right now")
+    //console.log(pilarone["key"+i+""]);
+    var division = 1/7;
+    percent += pilarone.key1*division
+    percent += pilarone.key2*division    
+    percent += pilarone.key2*division
+    percent += pilarone.key3*division
+    percent += pilarone.key4*division
+    percent += pilarone.key5*division
+    percent += pilarone.key6*division
+    percent += pilarone.key7*division
+    console.log(percent);
+    var percent = parseInt(percent);
     console.log(percent);
     for (var i = 0; i < hundredpercent ; i++) {
         colorid = "normal";
@@ -62,26 +77,17 @@ function pilargeneral() {
                 else {
                     color = "#003199"
                 }
-                var divtoadd = document.createElement("div");
-                var div_attribute = divtoadd.setAttribute("class", "pilar-case "+colorid+"");
-                var div_attribute = divtoadd.setAttribute("style", "background-color: "+color+"; opacity: "+1+";");
-                var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
-                document.getElementById('pilar-border-id').appendChild(divtoadd);
-                
-                var linktoadd = document.createElement("a");
-                var link_attribute = linktoadd.setAttribute("class", "pilar-link tooltip");
-                //var link_attribute = linktoadd.innerText = "link text";
-                var link_attribute = linktoadd.setAttribute( "data-tooltip", "Einsparungen: "+percent+"%");
-                var link_attribute = linktoadd.setAttribute("id", "pilar-case-"+i+"");
-                document.getElementById("pilar-case-"+i+"").appendChild(linktoadd);
-                //<span class="tooltiptext">Tooltip text</span>
-                /*
-                var spantoadd = document.createElement("span");
-                var span_attribute = spantoadd.setAttribute("class", "tooltiptext");
-                var span_attribute = spantoadd.setAttribute("id", "pilar-case-"+i+"");
-                var span_attribute = spantoadd.createTextNode("This is a span element.");
-                document.getElementById('pilar-case-'+i+'').appendChild(divtoadd);
-                */
+                    var divtoadd = document.createElement("div");
+                    var div_attribute = divtoadd.setAttribute("class", "pilar-case "+colorid+"");
+                    var div_attribute = divtoadd.setAttribute("style", "background-color: "+color+"; opacity: "+1+";");
+                    var div_attribute = divtoadd.setAttribute("id", "pilar-case-"+i+"");
+                    document.getElementById('pilar-border-id').appendChild(divtoadd);
+                    
+                    var linktoadd = document.createElement("a");
+                    var link_attribute = linktoadd.setAttribute("class", "pilar-link tooltip");
+                    var link_attribute = linktoadd.setAttribute( "data-tooltip", ""+tooltip_text+""+percent+"%");
+                    var link_attribute = linktoadd.setAttribute("id", "pilar-case-"+i+"");
+                    document.getElementById("pilar-case-"+i+"").appendChild(linktoadd);
 
             }
             else {
