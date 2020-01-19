@@ -25,6 +25,17 @@ module.exports = {
             })
         })
     },
+    getListOfAllCompanys: () => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM '+tableName+' ORDER BY unternehmen_ID DESC', (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    },
     getCompanyByName: (name) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM ' + tableName + ' WHERE unternehmen_name=?', name, (err, rows) => {
@@ -76,5 +87,35 @@ module.exports = {
                 }
             });
         });
+    },
+    updateCompanyWithPassword: (id, name, mail, password) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET unternehmen_passwort=?, unternehmen_name=?, unternehmen_mail=? WHERE unternehmen_ID=?',
+            [password, name, mail, id],
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.affectedRows);
+                }
+            });
+        });
+
+    },
+    updateCompanyWithoutPassword: (id, name, mail) => {
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE ' + tableName + ' SET  unternehmen_name=?, unternehmen_mail=? WHERE unternehmen_ID=?',
+            [name, mail, id],
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.affectedRows);
+                }
+            });
+        });
+
     }
+
+    
 }

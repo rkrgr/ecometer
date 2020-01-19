@@ -1,0 +1,31 @@
+<div id="formwrapper">
+        <h1>Profil bearbeiten</h1>
+        
+        <form id="profilform" action="/profile" method="post">
+        
+            <p>Firmenname:
+                <input type="text" value="{{company.name}}" id="firmenname" name="companyName" size="23" maxlength="150">
+            </p>
+
+            
+
+            <p>E-Mail:
+                <input type="email" value="{{company.mail}}" id="email" name="mail" size="10" maxlength="150">
+            </p>
+
+            <p>Altes Passwort:
+                <input type="password" id="pw" name="pw" size="10" maxlength="150">
+            </p>
+
+            <p>Neues Passwort:
+                <input type="password" id="pwn" name="pwn" size="10" maxlength="150">
+            </p>
+            
+            <div class="clearfix"></div>
+            <p>
+                <input type="submit" id="senden" name="senden" value="Ändern">
+            </p>
+        
+        </form>
+       
+    </div>

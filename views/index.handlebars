@@ -1,57 +1,93 @@
-<div id="historyChartContainer">
-    <canvas id="historyChart" width="600" height="400"></canvas>
+<div id="homeContainer">
+    <div id="pillarContainer">
+        <div class="row">
+            <div class="column">
+                <div id="bar">
+                    <div class="pilar-wrapper">
+                        <div class="pilar-border" id="pilar-border-id">
+                        <!--
+                            <div class="pilar-case" id="pilar-case-1">
+                            </div>
+                        -->
+                        </div>
+                    </div>
+                </div>
+                <div class="year">
+                    <span id="yearText">2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="historyChartContainer">
+        <canvas id="historyChart" width="600" height="400"></canvas>
+    </div>
+    <div id="tickers">
+        <div>
+            <table class="newsTicker">
+                <thead>
+                    <tr>
+                        <th colspan="2">News-Ticker</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each latestMeasures}}
+                    <tr>
+                        <td>
+                            <span>{{formatDateTime this.date}}</span>
+                        </td>
+                        <td rowspan="2">
+                            <span>{{this.name}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>{{this.company}}</span>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <table id="bestMeasures">
+                <thead>
+                    <tr>
+                        <th colspan="2">Beste Maßnahmen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each bestMeasures}}
+                    <tr>
+                        <td>
+                            <span>{{formatDateTime this.date}}</span>
+                        </td>
+                        <td>
+                            <span>{{this.name}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>{{this.company}}</span>
+                        </td>
+                        <td>
+                            <span>{{this.co2Saving}} t CO2 eingespart</span>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<table class="newsTicker">
-    <thead>
-        <tr>
-            <th colspan="2">News-Ticker</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each latestMeasures}}
-        <tr>
-            <td>
-                <span>{{formatDateTime this.date}}</span>
-            </td>
-            <td rowspan="2">
-                <span>{{this.name}}</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span>{{this.company}}</span>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<table id="bestMeasures">
-    <thead>
-        <tr>
-            <th colspan="2">Beste Maßnahmen</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each bestMeasures}}
-        <tr>
-            <td>
-                <span>{{formatDateTime this.date}}</span>
-            </td>
-            <td>
-                <span>{{this.name}}</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span>{{this.company}}</span>
-            </td>
-            <td>
-                <span>{{this.co2Saving}} t CO2 eingespart</span>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
 <input id="historyMapValues" type="hidden" value="{{historyMap}}">
+<input id="pilarDataByCompany" type="hidden" value="{{pilarDataByCompanyId}}">
+<input id="pilarDataListOfAllCompanys" type="hidden" value="{{pilarDataOfAllCompanys}}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 <script src="/js/historyChart.js"></script>
+
+<script src="/js/pilar.js"></script>
+<script src="/js/pilarCategorie.js"></script>
+<link rel="stylesheet" href="/css/pilar.css">
+
+<script type="text/javascript">
+   pilargeneral();
+</script>
+</div>

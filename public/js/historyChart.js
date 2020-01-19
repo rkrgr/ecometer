@@ -1,17 +1,16 @@
-var historyMap = new Map(JSON.parse(document.getElementById("historyMapValues").value));
-var ctx = document.getElementById('historyChart');
+const historyMap = new Map(JSON.parse(document.getElementById("historyMapValues").value).sort());
+const ctx = document.getElementById('historyChart');
 
-console.log(Array.from(historyMap.keys()));
-console.log(Array.from(historyMap.values()));
-
-var historyData = {
+const historyData = {
     labels: Array.from(historyMap.keys()),
     datasets: [{
-        data: Array.from(historyMap.values())
+        data: Array.from(historyMap.values()),
+        borderColor: '#6699cc',
+        backgroundColor: 'rgba(102, 153, 204, 0.3)'
     }]
 }
 
-var options = {
+const options = {
     scales: {
         yAxes: [
             {
@@ -35,7 +34,7 @@ var options = {
     }
 }
 
-var historyChart = new Chart(ctx, {
+const historyChart = new Chart(ctx, {
     type: 'line',
     data: historyData,
     options

@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Ecometer</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="nav">
+    <div class="topnav">   
+        <a href="/">Startseite</a>
         {{#if user}}
-            <ul>
-                <li>
-                    <form action="/logout" method="GET">
-                        <a href="javascript:;" onclick="parentNode.submit();">Logout</a>
-                    </form>
-                </li>
-            </ul>
+        <a href="/measures">Maßnahmen</a>
+        <a href="/invoices">Abrechnungen</a>
+        <div class="topnav-right">
+            <a href="/profile">Profil</a>
+            <form action="/logout" method="GET">
+                <a href="javascript:;" onclick="parentNode.submit();">Logout</a>
+            </form>
+        </div>
         {{else}}
-        <div>
+        <div class="topnav-right">
             <a href="/login">Login</a>
         </div>
-        {{/if}}
+        {{/if}} 
     </div>
     <div class="container">
         {{{body}}}

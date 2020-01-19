@@ -1,20 +1,35 @@
 <input id="unitsForCategoryValues" type="hidden" value="{{unitsForCategory}}">
+
+<div id="gross">
+
 <h1>Maßnahmen eintragen</h1>
 
 <form action="/measures/createMeasures" method="POST">
+    <h5>Bitte wählen Sie eine Kategorie aus: </h5>
+        <table>
+
+                <input type="radio" name="Energie" value="energie" checked> Energie<br>
+                <input type="radio" name="Waermeenergie" value="Wärme"> W&auml;rmeenergie<br>
+                <input type="radio" name="Frischwasser" value="Frischwasser"> Frischwasser<br>
+                <input type="radio" name="Abwasser" value="abwasser"> Abwasser<br>
+                <input type="radio" name="Gruenbeflanzung" value="pflanze"> Gr&uuml;nbepflanzung
+
+        </table>
+
+<br>
 
 <table>
+  <thead>
             <tr>
-                <td>Ma&szlig;nahmen </td>
-                <td>Kategorie </td>
-                <td>Datum </td>
-                <td>Abs. Einsparung</td>
-                <td>Einheit</td>
-                <td>CO&sup2; Einsparung</td>
-                
-            </tr>
+                <th>Ma&szlig;nahmen </th>
+                <th>Datum </th>
+                <th>Abs. Einsparung</th>
+                <th>Einheit</th>
+                <th>CO&sup2; Einsparung</th>
+                <th>Einheit</th>
+            </tr></thead>
             <tr>
-                
+
                 <td><input name="massnahme_name" type="text" size="55" value ="Heckenpflanzungen"></td>
                 <td>
                     <select id="category" name="category" onchange="resetUnitSelect()">
@@ -27,7 +42,7 @@
                 </td>
                 </td>
                 <td><input name="massnahme_absoluteeinsaprung" type="text" size="7,5"value ="50"></td>
-                
+
                 <td> <select id="frei" name ="fk_mass_einheit">
                     {{#each unitsforCategory}}
                             <option value="{{this.id}}">{{this.name}}</option>
@@ -48,6 +63,7 @@
         <input type="submit" name="measure" id="wpbdp-bar-show-directory-button" value="speichern">
         <br>
     </form>
+</div>
 <script>
     let categorySelect = document.getElementById("category");
     let unitSelect = document.getElementById("unit");
@@ -69,4 +85,3 @@
 
     resetUnitSelect();
 </script>
-
