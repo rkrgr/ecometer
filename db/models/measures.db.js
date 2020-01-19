@@ -67,10 +67,9 @@ module.exports = {
     },
     getAllMeasures: (companyId) => {
         return new Promise((resolve, reject) => {
-            let query = `SELECT ${tableName}.*,tbl_kategorie.kategorie_name FROM ${tableName}
-            left join tbl_kategorie on ${tableName}.fk_mass_kategorie=tbl_kategorie.kategorie_ID
-            ORDER BY massnahme_datum DESC`;
-            db.query(query, companyId, (err, rows) => {
+            db.query('SELECT * FROM ' + tableName + ' m, tbl_kategorie k, tbl_einheit e ' +
+                     'WHERE m.fk_mass_kategorie = k.kategorie_ID AND m.fk_mass_einheit = e.einheit_ID AND m.fk_mass_unternehmen=? ORDER BY m.massnahme_datum DESC', 
+                    companyId, (err, rows) => {
                 if (err) {
                    
                     reject(err)
